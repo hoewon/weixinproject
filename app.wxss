@@ -1,0 +1,137 @@
+page {
+    font-family: -apple-system-font, 'Helvetica Neue', Helvetica, 'Microsoft YaHei', sans-serif;
+    font-family:;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1rpx solid #ccc;
+}
+
+.page-header-text {
+    padding: 20rpx 40rpx;
+    color: #999;
+    font-size: 38rpx;
+    text-align: center;
+}
+
+.page-body {
+
+}
+
+/* globe*/
+
+.right{
+    position: absolute;
+    right: 0rpx;
+}
+
+
+/*recipe list 这玩意不合理啊, 最后总表不要爆?*/
+
+.recipe-list-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.recipeFull {
+    display: flex;
+    /*flex: 1;*/
+    border-bottom: 2rpx solid #ccc;
+    cursor: pointer;
+}
+
+.recipeFull image {
+    width: 750rpx;
+    height: 421rpx;
+}
+
+.recipeFull .cover {
+    position: absolute;
+    display: flex;
+    /*flex: 1;*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(52,52,52,0.1);
+    width: 750rpx;
+    height: 421rpx;
+}
+
+.recipeFull .title {
+    color: #fff;
+    font-size: 35rpx;
+}
+
+.recipeFull .subtitle{
+    color: #fff;
+    font-size: 25rpx;
+}
+
+/**/
+
+.item {
+    display: flex;
+    padding: 20rpx 40rpx;
+    border-bottom: 1rpx solid #eee;
+    cursor: pointer;
+}
+
+.item .poster {
+    width: 128rpx;
+    height: 128rpx;
+    margin-right: 20rpx;
+}
+
+.item .meta {
+    flex: 1;
+}
+
+.item .meta .title,
+.item .meta .sub-title {
+    display: block;
+    margin-bottom: 15rpx;
+}
+
+.item .meta .title {
+    font-size: 32rpx;
+}
+
+.item .meta .sub-title {
+    font-size: 22rpx;
+    color: #c0c0c0;
+}
+
+.item .meta .artists {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.item .rating {
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #f74c31;
+}
+
+.tips {
+    font-size: 28rpx;
+    text-align: center;
+    padding: 50rpx;
+    color: #ccc;
+}
+
+.tips image {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+}
+
+.tips image,
+.tips text {
+    vertical-align: middle;
+}

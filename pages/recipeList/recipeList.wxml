@@ -1,0 +1,2 @@
+<import src="../component/recipe-list.wxml"/>
+<template is="recipe-list" data="{{ recipes, loading, hasMore, loadMore }}"/>

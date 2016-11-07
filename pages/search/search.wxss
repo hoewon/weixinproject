@@ -1,0 +1,85 @@
+
+
+
+
+
+.result-view {
+    display: flex;
+    flex-direction: row;
+    height: 80rpx;
+    margin-left: 30rpx;
+    align-items: center;
+}
+
+.result-text {
+    font-size: 32rpx;
+}
+
+.result-text-right:before
+{
+    content:"搜索：";
+    /*background-color:yellow;*/
+    color:black;
+    /*font-weight:bold;*/
+}
+
+
+.result-text-right {
+    margin-left: 30rpx;
+    color: red;
+}
+
+.right {
+    position: absolute;
+    right: 0rpx;
+}
+
+.result-tag-view {
+    border-top: 2rpx solid #ccc;
+}
+/*hot*/
+
+.hot {
+    /*margin-top: 200rpx;*/
+    background-color: #eee;
+    height: 321rpx
+}
+
+.hot-title-view {
+    display: flex;
+    margin-top: 6rpx;
+    height: 60rpx;
+    padding-left: 30rpx;
+    /*justify-content: center;*/
+    align-items: center;
+    background-color: #fff;
+}
+
+.hot-title-text {
+    color: lightgray;
+    font-size:30rpx;
+}
+
+.hot-button-view {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.hot-button {
+    display: flex;
+    width: 248rpx;
+    height: 80rpx;
+    margin-top: 3rpx;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.hot-button-text {
+    font-size: 32rpx;
+}

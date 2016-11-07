@@ -1,0 +1,50 @@
+<!-- 渲染普通的单项数据 -->
+<!--不必区分嵌套,直接实现所有list功能, 因为没那么复杂了-->
+<!--如果图片不能做背景,那就只保留thumb类型-->
+<template name="full">
+    <navigator url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}">
+        <view class="recipeFull">
+            <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
+            <view class="cover">
+                <text class="title">{{item.title}}</text>
+                <text class="subtitle">{{item.tag.title}} · {{item.date}} · {{item.duration}}</text>
+            </view>
+        </view>
+    </navigator>
+</template>
+
+
+<template name="thumb">
+<navigator url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}">
+    <view class="item">
+        <image class="poster" src="{{item.images.small}}"></image>
+        <view class="meta">
+            <text class="title">{{item.title}}</text>
+            <text class="sub-title">{{item.original_title}}({{item.year}})</text>
+            <view class="artists">
+                <text>导演thumb：</text>
+                <text wx:for="{{item.directors}}">{{item.name}}</text>
+            </view>
+        </view>
+        <view class="rating">
+            <text>{{item.rating.average}}</text>
+        </view>
+    </view>
+</navigator>
+</template>
+        <!-- 电影列表组件 供每一个列表展示的页面使用 -->
+<template name="recipe-list">
+<scroll-view scroll-y="true" class="recipe-list-body" bindscrolltolower="loadMore">
+    <template is="{{item.subject ? 'thumb' : 'full'}}" data="{{item}}" wx:for="{{recipes}}"/>
+    <view class="tips">
+        <view wx:if="{{hasMore}}">
+            <image src="/images/loading.gif" mode="aspectFill"/>
+            <text>加载更多...</text>
+        </view>
+        <view wx:else>
+            <text>无更多内容</text>
+        </view>
+    </view>
+</scroll-view>
+<loading hidden="{{!loading}}">加载中...</loading>
+</template>

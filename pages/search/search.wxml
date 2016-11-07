@@ -1,0 +1,60 @@
+<!-- 搜索电影 -->
+<!--<import src="../component/recipe-list.wxml"/>-->
+<!--顶部使用横排还是竖排也待定-->
+<view class="page-header">
+<form bindsubmit="search" bindreset="formReset">
+    <input class="page-header-text" placeholder="{{subtitle}}" name="keyword" bindinput="input" bindchange="search"/>
+    <button formType="submit" type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}">搜索</button>
+</form>
+</view>
+
+        <!--搜索结果-->
+<view wx:if="{{loaded}}">
+
+</view>
+<view wx:else>
+</view>
+
+
+<view class="result">
+    <navigator class="result-title" wx:if="{{text.length}}" url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}">
+        <view class="result-view">
+            <icon type="search" size="20" color="{{gray}}"/>
+            <text class="result-text result-text-right">{{text}}</text>
+            <text class="result-text right">></text>
+        </view>
+    </navigator>
+    <navigator class="tag-button"  wx:for="{{tags}}" url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+        <view class="result-view result-tag-view">
+            <text class="result-text">{{item.title}}</text>
+        </view>
+    </navigator>
+</view>
+<view class="hot">
+    <view class="hot-title-view">
+        <text class="hot-title-text">流行搜索</text>
+    </view>
+    <view class="hot-button-view">
+        <view class="hot-button" wx:for="{{hot}}">
+            <navigator class="hot-button" url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+                    <text class="hot-button-text">{{item.title}}</text>
+            </navigator>
+        </view>
+    </view>
+
+<!--用button 还是navigator 都待定-->
+
+<!--<view class="hot-button-view">-->
+    <!--<view class="hot-button" wx:for="{{hot}}">-->
+        <!--<view id="{{item.objectId}}" data-title="{{item.title}}" bindtap="tapTag">{{item.title}}</view>-->
+    <!--</view>-->
+<!--</view>-->
+</view>
+
+
+
+
+
+
+
+

@@ -1,12 +1,29 @@
 <!-- 搜索电影 -->
 <!--<import src="../component/recipe-list.wxml"/>-->
 <!--顶部使用横排还是竖排也待定-->
-<view class="page-header">
 <form bindsubmit="search" bindreset="formReset">
-    <input class="page-header-text" placeholder="{{subtitle}}" name="keyword" bindinput="input" bindchange="search"/>
-    <button formType="submit" type="primary" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}">搜索</button>
+    <!--<view class="result-view">-->
+    <!--<icon type="search" size="20" color="{{gray}}"/>-->
+    <!--<view class="search">-->
+    <!--<input class="search-left flex-item" placeholder="{{subtitle}}" name="keyword"-->
+           <!--bindinput="input" bindchange="search" placeholder-class="search-placeholder"/>-->
+    <!--</view>-->
+    <!--</view>-->
+    <view class="search flex-wrp">
+        <view class="search-left flex-item">
+            <image src="../../images/search.png"></image>
+            <input placeholder="{{subtitle}}" placeholder-class="search-placeholder"
+                   name="keyword" bindinput="input"
+            bindchange="search"/>
+        </view>
+    </view>
+    <view class="search-right flex-item" bindtap="upper">
+        <!--可以加logo--!>
+        <!--<button  formType="submit" type="default" loading="{{loading}}"-->
+                  <!--disabled="{{disabled}}" hover-class="button-hover">搜索</button>-->
+    </view>
+
 </form>
-</view>
 
         <!--搜索结果-->
 <view wx:if="{{loaded}}">
@@ -19,7 +36,7 @@
 <view class="result">
     <navigator class="result-title" wx:if="{{text.length}}" url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}">
         <view class="result-view">
-            <icon type="search" size="20" color="{{gray}}"/>
+            <!--<icon type="search" size="20" color="{{gray}}"/>-->
             <text class="result-text result-text-right">{{text}}</text>
             <text class="result-text right">></text>
         </view>

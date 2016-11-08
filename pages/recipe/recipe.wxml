@@ -22,7 +22,9 @@
         </view>
         <view class="subtitle-view" bindtap="tapSub">
             <text class="subtitle">{{tags[0].title}} · {{recipe.date}}</text>
-            <icon class="right" animation="{{a2}}" type="success" size="25" color="{{isFav?'red':'orange'}}"/>
+            <!--<icon class="right" animation="{{a2}}" type="waiting" size="25" rotate="45" color="{{isFav?'red':'orange'}}"/>-->
+            <image src="../../images/less.png" class="right" animation="{{a2}}"  type="success"
+                   color="{{isFav?'red':'orange'}}"></image>
         </view>
         <view animation="{{animationData}}" class="desc-view" >
             <view wx:if="{{draw}}" bindtap="tapSub">
@@ -40,12 +42,14 @@
             </view>
         </view>
         <view class="buttons">
-            <view class="button" bindtap="tapFav" >
-                <icon type="success" size="25" color="{{isFav?'red':'orange'}}"/>
+            <view class="button" bindtap="tapShare" >
+                <icon type="success" size="25" color="{{isShare?'red':'orange'}}"/>
                 <text>{{share}}</text>
             </view>
             <view class="button" bindtap="tapFav" >
-                <icon type="success" size="25" color="{{isFav?'red':'orange'}}"/>
+                <!--<icon type="success" size="25"  color="{{isFav?'red':'orange'}}"/>-->
+                <image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"
+                       color="{{isFav?'red':'orange'}}">{{iconP}}</image>
                 <text>{{favorite}}</text>
             </view>
         </view>

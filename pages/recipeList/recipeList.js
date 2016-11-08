@@ -47,7 +47,7 @@ Page({
     // console.log(sort,term);
     AV.Cloud.run('recipeList', {sort: sort, term: term, ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
       .then(list=> {
-        this.data.page++
+        this.data.page++;
         if (list.length) {
           this.setData({recipes: list, loading: false})
         } else {

@@ -7,7 +7,7 @@ Page({
   data: {
     // 读取页面基础数据
     loaded:false,
-
+    locality:[],
     page: 1,
     size: 20,
     subtitle: '请在此输入搜索内容',
@@ -58,16 +58,18 @@ Page({
   },
 
   search (e) {
+    console.log(e);
     // console.log(e.detail.value, 'keyword 出口 转向result');
     if (!e.detail.value.keyword) return;
     // keyword 出口 转向result
     this.toResult(e.detail.value.keyword)
 
     // 保存记录? 搜索记录先不弄, 第一版不搞本地
-
+    wx.setStorageSync('caption','title');
+    console.log(1);
+    console.log(caption);
   },
   // 同样是两种出口, tag 和 keyword/result
-
 
   tapTag: function(event) {
     console.log(event)
@@ -78,16 +80,21 @@ Page({
   },
 
   toTag(id,title){
-    console.log(id);
+    //console.log(id);
     wx.navigateTo({
       url: '../recipeList/recipeList?sort=tag&term='+id+'&title='+title
-    })
+    });
+    //console.log(title);
+    //wx.setStorageSync('caption','title');
+    //console.log(caption);
   },
 
   toResult(k){
-    console.log(k,'result');
+    //console.log(k,'result');
     wx.navigateTo({
       url: '../recipeList/recipeList?sort=keyword&term='+k+'&title='+k
-    })
+    });
+    //wx.setStorageSync('caption','k');
+    //console.log(caption);
   }
 })

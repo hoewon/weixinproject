@@ -36,9 +36,18 @@
 }
 
 .right{
-    right:39rpx
-}
 
+    right:39rpx;
+
+    height:25rpx;
+    width:25rpx;
+
+
+}
+.icon-image{
+    height:30rpx;
+    width:30rpx;
+}
 .desc-view {
     /*padding: 20rpx 0rpx;*/
     /*height:80rpx;*/

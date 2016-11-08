@@ -1,3 +1,20 @@
 {
-
+  "tabBar": {
+    "list": [
+      {
+        "iconPath": "../../images/like.png",
+        "selectedIconPath": "../../images/unlike.png"
+      },
+      {
+        "iconPath": "../../images/search.png",
+        "selectedIconPath": "../../images/search-actived.png"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "iconPath": "../../images/like.png",
+      "selectedIconPath": "../../images/unlike.png"
+    }
+]
 }

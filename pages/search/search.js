@@ -7,7 +7,7 @@ Page({
   data: {
     // 读取页面基础数据
     loaded:false,
-    locality:[],
+    caption:[],
     page: 1,
     size: 20,
     subtitle: '请在此输入搜索内容',
@@ -24,10 +24,35 @@ Page({
       .then((o)=> {
         console.log(o);
         this.setData({
-          hot: o ? o : []
+          hot: o ? o : [],
+
         });
       })
-  },
+    //wx.clearStorage()
+    wx.getStorage({
+      key: 'key',
+      success: function(res) {
+        console.log(res)
+       let a = JSON.parse(res)
+        this.setData({
+          caption:a
+
+        });
+      },
+      fail: function(res){
+        console.log(res)
+        wx.setStorage({
+          key:"key",
+          //data: JSON.stringify([])
+           data: {[]}
+
+
+        })
+      }
+    })
+      // Do something when catch error
+    }
+  ,
 
   input(e){
     console.log(e.detail.value,'tag 出口 转向taglist');
@@ -65,9 +90,7 @@ Page({
     this.toResult(e.detail.value.keyword)
 
     // 保存记录? 搜索记录先不弄, 第一版不搞本地
-    wx.setStorageSync('caption','title');
-    console.log(1);
-    console.log(caption);
+
   },
   // 同样是两种出口, tag 和 keyword/result
 
@@ -85,8 +108,11 @@ Page({
       url: '../recipeList/recipeList?sort=tag&term='+id+'&title='+title
     });
     //console.log(title);
-    //wx.setStorageSync('caption','title');
-    //console.log(caption);
+    try {
+      wx.setStorageSync('caption', title)
+    } catch (e) {
+
+    }
   },
 
   toResult(k){

@@ -38,14 +38,18 @@
 <view class="result-title" >
            <!--url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}-->
 
-        <navigate class="result-view" data-id="{{text}}"  bindtap="toResult">
+        <navigate class="result-view"  wx:if="{{text.length}}" data-id="{{text}}"  bindtap="toResult">
             <!--<icon type="search" size="20" color="{{gray}}"/>-->
             <text class="result-text result-text-right">{{text}}</text>
             <text class="result-text right">></text>
         </navigate>
     </view>
-    <navigate class="tag-button"  wx:for="{{tags}}" url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
-        <view class="result-view result-tag-view">
+    <navigate class="tag-button"  >
+              <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
+        <view class="result-view result-tag-view" wx:for="{{tags}}"
+              data-id="{{item.objectId}}"
+              data-title="{{item.title}}"
+              bindtap="toTag">
             <text class="result-text">{{item.title}}</text>
         </view>
     </navigate>
@@ -56,11 +60,28 @@
     </view>
     <view class="hot-button-view">
         <view class="hot-button" wx:for="{{hot}}">
-            <navigator class="hot-button" url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+            <navigator class="hot-button"
+                       url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
                     <text class="hot-button-text">{{item.title}}</text>
             </navigator>
         </view>
     </view>
+    <navigate class="tag-button" >
+        <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
+        <view class="hot-title-view">
+        <text class="hot-title-text">搜索记录</text>
+        <icon url="../recipeList/recipeList?sort=tag&term={{item.id}}&title={{item.title}}"
+                class="icon"type="clear" size="12" color="#ccc"/>
+        </view>
+        <view class="result-view result-tag-view" wx:for="{{caption}}">
+            <!--data-id="{{item.objectId}}"-->
+            <!--data-title="{{item.title}}"-->
+            <!--bindtap="toTag"-->
+            <text class="result-text">{{item.title}}</text>
+            <text class="result-text">{{item.key}}</text>
+        </view>
+    </navigate>
+
 
 <!--用button 还是navigator 都待定-->
 

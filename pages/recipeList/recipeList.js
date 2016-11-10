@@ -48,6 +48,8 @@ Page({
     AV.Cloud.run('recipeList', {sort: sort, term: term, ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
       .then(list=> {
         this.data.page++;
+        console.log('跳转')
+        console.log(list)
         if (list.length) {
           this.setData({recipes: list, loading: false})
         } else {

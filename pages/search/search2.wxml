@@ -44,7 +44,8 @@
             <text class="result-text right">></text>
         </navigate>
     </view>
-    <navigate class="tag-button"  wx:for="{{tags}}" url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+    <navigate class="tag-button"  wx:for="{{tags}}"
+              url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
         <view class="result-view result-tag-view">
             <text class="result-text">{{item.title}}</text>
         </view>

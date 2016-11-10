@@ -32,8 +32,13 @@
     height: 45rpx;
     padding: 10rpx;
 }
-
-
+icon{
+    padding: 16rpx;
+    right:20rpx;
+    position: absolute;
+    height:25rpx;
+    width:25rpx;
+}
 
 
 .result-view {
@@ -65,6 +70,7 @@
 .right {
     position: absolute;
     right: 0rpx;
+
 }
 
 .result-tag-view {

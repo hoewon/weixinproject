@@ -28,16 +28,8 @@ Page({
 
         });
       })
-    //console.log(1111122222)
-    //let o =[
-    //  {"id":"1"},
-    //  {"id":"2"},
-    //  {"id":"3"}
-    //]
-    //JSON.stringify(o)
-    //console.log('qwe',a)
-    //console.log(JSON.parse(JSON.stringify(o)));
-    //console.log(typeof(JSON.stringify(o)));
+
+
 
    //wx.clearStorage()
    // 获取本地存取
@@ -47,13 +39,13 @@ Page({
       //如果有数据
       success: function(res) {
         console.log('成功')
-        console.log(res)
-        console.log(res.data)
+        console.log('res'+res)
+
+        console.log('data'+res.data)
+        console.log('输出')
        //定义一个变量，解包数据
         let a = JSON.parse(res.data);
-       //let a = JSON.parse(res);
         //加载数据
-        console.log('aa',a);
         _this.setData({
           caption: a
             })
@@ -67,9 +59,7 @@ Page({
         //console.log('asds',a);
         //添加一个空数据
         let o =[
-          //{"id":"1"},
-          //{"id":"2"},
-          //{"id":"3"}
+
         ]
         wx.setStorage({
           key:'caption',
@@ -127,6 +117,9 @@ Page({
   },
   // 同样是两种出口, tag 和 keyword/result
 
+  //toClaer(e){
+    //console
+  //}
   tapTag: function(event) {
     console.log(event)
 
@@ -135,35 +128,39 @@ Page({
     this.toTag(tag,title);
   },
 
-  toTag(id,title){
+  toTag(e){
     //console.log(id);
     console.log('点击1')
-     //console.log('event',event)
+    console.log('e',e)
     let {caption} = this.data;
     //等价let caption = this.data.caption;
     //key: id, title: title, type: 'tag',
-    caption.unshift({key: event.target.dataset.id, title:event.target.dataset.title, type: 'tag'});
-
+    caption.unshift({id: e.target.dataset.id, title:e.target.dataset.title, type: 'tag'});
     //let t = tools.removeDuplicates(list, "key");
-    //let o = t.slice(0, 5);
+    caption = caption.slice(0, 5);
     this.setData({caption: caption});
-    let o =[
-     caption
-    ]
+
     console.log(caption);
     wx.setStorage({
       key:'caption',
       //object
 
-      data:JSON.stringify(o),
+      data:JSON.stringify(caption),
       success:function(res){
         console.log('点击后赋值')
         console.log(res)
       }
     })
-    wx.navigateTo({
-      url: '../recipeList/recipeList?sort=tag&term='+id+'&title='+title
-    });
+    let id = e.target.dataset.id;
+    let title = e. target.title;
+    if(id) {
+      wx.navigateTo({
+        //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
+        url: '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title
+      });
+    }else{
+      url: '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title
+    }
     //console.log(title);
     //保存数据
 
@@ -171,38 +168,30 @@ Page({
   ,
 
   toResult(event){
-    //console.log(k,'result');
-    let key = event.target.dataset.id;
-    wx.navigateTo({
-      url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key});
-
     console.log('点击2')
     console.log('event',event)
     let {caption} = this.data;
     //等价let caption = this.data.caption;
-    //key: id, title: title, type: 'tag',
     caption.unshift({key: event.target.dataset.id, type: 'tag'});
-
-    //let t = tools.removeDuplicates(list, "key");
-    //let o = t.slice(0, 5);
     this.setData({caption: caption});
-    let o =[
-      caption
-    ]
+
     console.log(caption);
     wx.setStorage({
       key:'caption',
       //object
-
-      data:JSON.stringify(o),
+      data:JSON.stringify(caption),
       success:function(res){
         console.log('点击后赋值')
         console.log(res)
       }
     })
-
-
-
+    //console.log(k,'result');
+    let key = event.target.dataset.id;
+    wx.navigateTo({
+      //url="../recipeList/recipeList?sort=keyword&term=11&title=11"
+      //url="../recipeList/recipeList?sort=tag&term=57a80572a341310063420ea1&title=21421412"
+      url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key}
+    );
 
 
   }

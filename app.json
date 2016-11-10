@@ -5,7 +5,9 @@
     "pages/hot/hot",
     "pages/profile/profile",
     "pages/recipeList/recipeList",
-    "pages/recipe/recipe"
+    "pages/recipe/recipe",
+    "pages/mine/mine"
+
   ],
   "window": {
     "navigationBarBackgroundColor": "#35495e",
@@ -44,7 +46,14 @@
         "pagePath": "pages/profile/profile",
         "iconPath": "images/profile.png",
         "selectedIconPath": "images/profile-actived.png"
+      },
+      {
+        "text": "我",
+        "pagePath": "pages/mine/mine",
+        "iconPath": "images/board.png",
+        "selectedIconPath": "images/board-actived.png"
       }
+
     ]
   },
   "networkTimeout": {

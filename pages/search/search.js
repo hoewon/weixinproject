@@ -15,7 +15,11 @@ Page({
     text: '',
     loading: false,
     tags:[],
-    disabled:true
+    //输入开关
+    display:true,
+    //清除开关
+    disable:true
+
     // hasMore: false,
   },
 //页面加载
@@ -47,7 +51,8 @@ Page({
         let a = JSON.parse(res.data);
         //加载数据
         _this.setData({
-          caption: a
+          caption: a,
+          disable:true
             })
 
       },
@@ -61,6 +66,9 @@ Page({
         let o =[
 
         ]
+        _this.setData({
+          disable:false
+        })
         wx.setStorage({
           key:'caption',
           //object
@@ -84,8 +92,9 @@ Page({
       this.setData({
         text:text,
         loading:true,
-        disabled:false,
+        display:false
       });
+      console.log(' 输入值');
 
       AV.Cloud.run('categoryList', {sort: 'search', term: text, ex: '', l: 5, p: 0}, {remote: true})
         .then((r)=> {
@@ -99,9 +108,10 @@ Page({
         })
     }else{
       this.setData({
-        disabled:true,
-        tags:[]
+        tags:[],
+        display:true
       });
+      console.log('输入框空')
     }
   },
 
@@ -117,9 +127,6 @@ Page({
   },
   // 同样是两种出口, tag 和 keyword/result
 
-  //toClaer(e){
-    //console
-  //}
   tapTag: function(event) {
     console.log(event)
 
@@ -127,18 +134,58 @@ Page({
     let title = event.target.dataset.title;
     this.toTag(tag,title);
   },
+  toCaption(e){
+    console.log('历史跳转')
+    console.log(e)
+    let {key,title} = e.target.dataset;
+    console.log(key)
+    console.log(title)
+    if(!title){
+      console.log('单')
+      wx.navigateTo({
+        url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key}
+      );
+    }else{
+      console.log('双')
+      wx.navigateTo({
+        url: '../recipeList/recipeList?sort=tag&term=' + key + '&title=' + title
+      });
 
+    }
+
+  },
+
+  toClear(e){
+    console.log('清除')
+    //添加一个空数据
+    wx.setStorage({
+          key:'caption',
+          //object
+          // data:JSON.stringify([])
+          data:JSON.stringify([])
+
+  })
+  this.setData({
+    caption:[],
+    disable:false
+  })}
+  ,
+  //弹出框搜索
   toTag(e){
     //console.log(id);
+
     console.log('点击1')
     console.log('e',e)
     let {caption} = this.data;
     //等价let caption = this.data.caption;
     //key: id, title: title, type: 'tag',
-    caption.unshift({id: e.target.dataset.id, title:e.target.dataset.title, type: 'tag'});
+    caption.unshift({key: e.target.dataset.id, title:e.target.dataset.title, type: 'tag'});
     //let t = tools.removeDuplicates(list, "key");
     caption = caption.slice(0, 5);
-    this.setData({caption: caption});
+    this.setData({
+      caption: caption,
+      disable:true
+    });
 
     console.log(caption);
     wx.setStorage({
@@ -151,30 +198,26 @@ Page({
         console.log(res)
       }
     })
-    let id = e.target.dataset.id;
+    let key = e.target.dataset.id;
     let title = e. target.title;
-    if(id) {
+
       wx.navigateTo({
         //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
-        url: '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title
+        url: '../recipeList/recipeList?sort=tag&term=' + key + '&title=' + title
       });
-    }else{
-      url: '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title
-    }
-    //console.log(title);
-    //保存数据
-
     }
   ,
-
+  //搜索框搜索
   toResult(event){
     console.log('点击2')
     console.log('event',event)
     let {caption} = this.data;
     //等价let caption = this.data.caption;
-    caption.unshift({key: event.target.dataset.id, type: 'tag'});
-    this.setData({caption: caption});
-
+    caption.unshift({key: event.target.dataset.id, type: 'keyword'});
+    this.setData({
+      caption: caption,
+      disable:true
+    });
     console.log(caption);
     wx.setStorage({
       key:'caption',

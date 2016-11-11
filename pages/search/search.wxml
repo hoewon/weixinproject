@@ -9,7 +9,7 @@
            <!--bindinput="input" bindchange="search" placeholder-class="search-placeholder"/>-->
     <!--</view>-->
     <!--</view>-->
-    <view class="search flex-wrp">
+    <view class="search">
         <view class="search-left flex-item">
             <image src="../../images/search.png"></image>
             <input placeholder="{{subtitle}}" placeholder-class="search-placeholder"

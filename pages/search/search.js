@@ -214,6 +214,7 @@ Page({
     let {caption} = this.data;
     //等价let caption = this.data.caption;
     caption.unshift({key: event.target.dataset.id, type: 'keyword'});
+    caption = caption.slice(0, 5);
     this.setData({
       caption: caption,
       disable:true

@@ -1,3 +1,26 @@
 
+.coniter{
+    padding:20rpx;
+    text-align:center;
+}
+.forminfo{
+    display: flex;
+    flex-direction: column;
+    padding: 200rpx 0;
+    align-items: center;
+}
+.sub-placeholder{
+    color: #8CCEFD;
+    line-height: 20rpx;
+}
+.weui{
+    font-size: 25rpx;
+    color: #939393;
+    padding: 15rpx;
+    width: 228rpx;
+    height: 78rpx;
+    margin: 20rpx;
 
 
+    border-bottom: 1px solid #ccc;
+}

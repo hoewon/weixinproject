@@ -1,14 +1,12 @@
-<view>
-        <form bindsubmit="formSubmit">
-        <view>视频名称</view>
-            <input  name="title" maxlength="20"
-                    data-title="title"
-                    type="text" bindinput="inputT" placeholder="名称"/>
+<view class="coniter">
+        <form bindsubmit="formSubmit" class="forminfo">
 
-        <view>视频地址</view>
-            <input  name="url" maxlength="100"
+            <input class="weui"  name="title" maxlength="20"
+                    data-title="title"
+                    type="text" bindinput="inputT" placeholder="视频名称" placeholder-class="sub-placeholder"/>
+            <input  class="weui" name="url" maxlength="100"
                     data-url="url"
-                    type="text" bindinput="inputT" placeholder="地址"/>
+                    type="text" bindinput="inputT" placeholder="视频地址" placeholder-class="sub-placeholder"/>
         <button formType="submit" type="primary" disabled="{{subT&&subU?false:true}}" >提交</button>
         </form>
 

@@ -6,7 +6,8 @@
     "pages/profile/profile",
     "pages/recipeList/recipeList",
     "pages/recipe/recipe",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/sub/sub"
 
   ],
   "window": {

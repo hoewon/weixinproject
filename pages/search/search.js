@@ -1,5 +1,5 @@
 // Douban API 操作
-const douban = require('../../libraries/douban.js');
+//const douban = require('../../libraries/douban.js');
 const AV = require('../../utils/av-weapp');
 
 // 创建一个页面对象用于控制页面的逻辑
@@ -87,7 +87,7 @@ Page({
 
   input(e){
     console.log(e.detail.value,'tag 出口 转向taglist');
-    const text = e.detail.value;
+    const text = e.detail.value.replace(/^\s+/,"");
     if(text.length>0){
       this.setData({
         text:text,

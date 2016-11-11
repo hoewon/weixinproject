@@ -1,0 +1,15 @@
+<view>
+        <form bindsubmit="formSubmit">
+        <view>视频名称</view>
+            <input  name="title" maxlength="20"
+                    data-title="title"
+                    type="text" bindinput="inputT" placeholder="名称"/>
+
+        <view>视频地址</view>
+            <input  name="url" maxlength="100"
+                    data-url="url"
+                    type="text" bindinput="inputT" placeholder="地址"/>
+        <button formType="submit" type="primary" disabled="{{subT&&subU?false:true}}" >提交</button>
+        </form>
+
+</view>

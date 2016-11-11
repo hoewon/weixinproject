@@ -1,7 +1,9 @@
-var app = getApp()
+var app = getApp();
+//const AV = require('../../utils/av-weapp');
 Page({
     data: {
-        userInfo: {}
+        userInfo: {},
+
     },
     onLoad: function() {
         var that = this
@@ -12,7 +14,16 @@ Page({
                 userInfo: userInfo
             })
         })
-    }
+    },
+    toSub(e){
+        console.log('投稿')
+        console.log(e)
+        wx.navigateTo({
+            url: '../sub/sub'
+        })
+
+    },
+
 
 
 })

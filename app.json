@@ -3,11 +3,9 @@
     "pages/home/home",
     "pages/search/search",
     "pages/hot/hot",
-    "pages/profile/profile",
     "pages/recipeList/recipeList",
     "pages/recipe/recipe",
-    "pages/mine/mine",
-    "pages/sub/sub"
+    "pages/store/store"
 
   ],
   "window": {
@@ -44,16 +42,11 @@
       },
       {
         "text": "我的",
-        "pagePath": "pages/profile/profile",
+        "pagePath": "pages/store/store",
         "iconPath": "images/profile.png",
         "selectedIconPath": "images/profile-actived.png"
-      },
-      {
-        "text": "我",
-        "pagePath": "pages/mine/mine",
-        "iconPath": "images/board.png",
-        "selectedIconPath": "images/board-actived.png"
       }
+
 
     ]
   },

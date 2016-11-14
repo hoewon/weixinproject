@@ -9,9 +9,13 @@ Page({
     hasMore: true,
     recipes: []
   },
+    onLoad(e) {
+        var that = this;
+    },
 
   loadMore () {
-    if (!this.data.hasMore) return;
+      if (!this.data.hasMore) return;
+
 
     AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
       .then(list=> {

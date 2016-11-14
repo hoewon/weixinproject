@@ -1,6 +1,6 @@
 // Douban API 操作
 const AV = require('../../utils/av-weapp');
-
+var app = getApp();
 // const douban = require('../../libraries/douban.js')
 
 // 创建一个页面对象用于控制页面的逻辑
@@ -22,15 +22,14 @@ Page({
     favorite: 0,
     draw: true,
     iconP: '../../images/like.png',
-    uiconP:'../../images/unlike.png'
+    uiconP:'../../images/unlike.png',
+    globalData:{
+    }
 
 
   },
 
   onLoad (params) {
-
-    // 传参机制,更接近web?'
-
     const {id, title} = params;
     console.log(params);
 
@@ -41,7 +40,18 @@ Page({
     console.log(title);
 
      //const video = 'http://ac-4s28kj56.clouddn.com/8a1a5a0e83d5044c9081.mp4';
-    const video = "https://dn-4s28kj56.qbox.me/31be8bd7ced64d6d.mp4"
+    const video = "https://dn-4s28kj56.qbox.me/31be8bd7ced64d6d.mp4";
+//初始判断是否收藏
+    AV.Cloud.run('isFav', {id: id}, {remote: true})
+        .then((o)=> {
+          console.log('o',o)
+          // 只触发监听, 不触发本体
+          this.setData({
+            isFav: o
+          });
+        }).catch((err) => {
+      console.log(err);
+    });
 
 
 
@@ -68,15 +78,7 @@ Page({
          console.error(e)
        });
 
-    //AV.Cloud.run('isFav', {id: id}, {remote: true})
-    //  .then((o)=> {
-    //    console.log('状态' + o.isFav);
-    //    this.setData({isFav: o.isFav});
-    //  })
-    //  .catch((err) => {
-    //      console.log(err);
-    //    }
-    //  );
+
 
     AV.Cloud.run('recipeList', {
       sort: 'latest',
@@ -157,12 +159,32 @@ Page({
   tapFav(event){
     //收藏
     // 判定是否登陆 ,如果未登录要去登陆
-    // AV.User.logIn('1', '1').then(user => {
-    //   console.log(user);
-    //   this.globalData.user = user;
+
+// 调用小程序 API，得到用户信息
+    const user = AV.User.current();
+    wx.getUserInfo({
+      success: ({userInfo}) => {
+        // 更新当前用户的信息
+        user.set(userInfo).save().then(user => {
+          console.log('已经登陆');
+
+          // 成功，此时可在控制台中看到更新后的用户信息
+          //this.globalData.user = user.toJSON();
+          console.log('user',user)
+        }).catch(console.error);
+      },
+      fail:({userInfo})=>{
+            AV.User.loginWithWeapp().then(user => {
+              console.log('登陆')
+              this.globalData.user = user.toJSON();
+            }).catch(console.error);
+          }
+
+    });
+
     AV.Cloud.run('fav', {id: this.data.recipe.objectId, isFav: this.data.isFav}, {remote: true})
       .then((o)=> {
-        console.log(o)
+        console.log('o',o)
         // 只触发监听, 不触发本体
         this.setData({
           isFav: o,
@@ -172,11 +194,7 @@ Page({
       console.log(err);
     })
 
-    //
-    //   }, console.error);
-    //
-    //
-    //
+
   },
 
   tapSub(e){
@@ -184,7 +202,6 @@ Page({
     var a1 = wx.createAnimation({
       duration: 5000,
       timingFunction: 'linear',
-      // delay: 1000
     })
 
     var a2 = wx.createAnimation({
@@ -200,9 +217,7 @@ Page({
       a1.height('auto').step();
       a2.rotate(-180).step();
       a2.opacity(0).step();
-
       this.setData({
-        // animationData: a1.export(),
         a2: a2.export(),
         draw: false
       })
@@ -211,7 +226,6 @@ Page({
       a2.rotate(0).step();
       a2.opacity('0').step();
       this.setData({
-        // animationData: a1.export(),
         a2: a2.export(),
         draw: true
       })

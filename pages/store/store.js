@@ -21,6 +21,12 @@ Page({
                     // 成功，此时可在控制台中看到更新后的用户信息
                     this.globalData.user = user.toJSON();
                 }).catch(console.error);
+            }  ,
+            fail:({userInfo})=>{
+                AV.User.loginWithWeapp().then(user => {
+                    console.log('登陆')
+                    this.globalData.user = user.toJSON();
+                }).catch(console.error);
             }
         });
 

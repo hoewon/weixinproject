@@ -120,6 +120,7 @@ onShow(params){
   },
   tapFive(event){
     console.log(event);
+    console.log('跳！！！！！！！');
     let Id = event.currentTarget.dataset.idfive;
     let title = event.currentTarget.dataset.titlefive;
     let page =  getCurrentPages();

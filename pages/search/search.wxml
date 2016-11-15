@@ -29,11 +29,11 @@
 <view class="result-title" wx:if="{{!display}}">
            <!--url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}-->
 
-        <navigate class="result-view"  wx:if="{{text.length}}" data-id="{{text}}"  bindtap="toResult">
+        <navigator class="result-view"  wx:if="{{text.length}}" data-id="{{text}}"  bindtap="toResult">
             <!--<icon type="search" size="20" color="{{gray}}"/>-->
             <text class="result-text result-text-right">{{text}}</text>
             <text class="result-text right">></text>
-        </navigate>
+        </navigator>
     </view>
     <navigate class="tag-button"  >
               <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
@@ -47,7 +47,7 @@
     </navigate>
 </view>
 <view wx:if="{{display}}">
-<navigate class="tag-button"  >
+<navigator class="tag-button"  >
 <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
     <view wx:if="{{disable}}">
         <view class="hot-title-view">
@@ -66,7 +66,7 @@
     <       text class="result-text">{{item.title?item.title:item.key}}</text>
         </view>
     </view>
-</navigate>
+</navigator>
 <view class="hot" wx:if="{{display}}">
     <view class="hot-title-view">
         <text class="hot-title-text">流行搜索</text>

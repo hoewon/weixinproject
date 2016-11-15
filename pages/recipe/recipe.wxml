@@ -1,16 +1,11 @@
 <!-- 电影明细 -->
-<import src="../component/recipe-list.wxml"/>
-<!--<template name="thumb">-->
-    <!--<navigator url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}">-->
-        <!--<view class="thumb">-->
-            <!--<image class="thumb-image" src="{{item.image}}?imageView2/1/w/320/h/180"/>-->
-            <!--<view class="thumb-right">-->
-                <!--<text class="thumb-right-title">{{item.title}}</text>-->
-                <!--<text class="thumb-right-subtitle">{{item.tag.title}} · {{item.date}}</text>-->
-            <!--</view>-->
-        <!--</view>-->
-    <!--</navigator>-->
-<!--</template>-->
+<!--<import src="../component/recipe-list.wxml"/>-->
+<template name="thumb">
+    <!--url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}"-->
+
+
+
+</template>
 
 <loading hidden="{{!loading}}">
 加载中...
@@ -39,9 +34,10 @@
                     <text class="desc">{{recipe.desc}} 来源{{recipe.cook.username}}</text>
                 </view>
                 <view  class="tags">
-                    <navigator class="tag-button" wx:for="{{tags}}" url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+                    <view class="tag-button" wx:for="{{tags}}"
+                          data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapTag" >
                         <text class="tag-button-text">{{item.title}}</text>
-                    </navigator>
+                    </view>
                 </view>
             </view>
         </view>
@@ -60,7 +56,16 @@
     </view>
     <!--关联列表-->
     <view class="thumb-view">
-        <template is="thumb" data="{{item}}" wx:for="{{recipes}}"/>
+        <!--<template is="thumb" />-->
+        <view data="{{item}}" wx:for="{{recipes}}">
+        <view class="thumb"  data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
+            <image class="thumb-image" src="{{item.image}}?imageView2/1/w/320/h/180"/>
+            <view class="thumb-right">
+                <text class="thumb-right-title">{{item.title}}</text>
+                <text class="thumb-right-subtitle">{{item.tag.title}} · {{item.date}}</text>
+            </view>
+        </view>
+        </view>
     </view>
     <view class="tips">
         <view wx:if="{{hasMore}}">

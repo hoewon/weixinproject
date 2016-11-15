@@ -97,6 +97,19 @@ Page({
 
       });
   },
+    tapFive(event){
+        console.log('首页跳！！！！');
+        console.log(event);
+        let Id = event.currentTarget.dataset.idfive;
+        let title = event.currentTarget.dataset.titlefive;
+        let page =  getCurrentPages();
+        let url = '../recipe/recipe?id='+Id+'&title='+title
+
+            wx.navigateTo({
+                url:url
+            })
+
+        },
     loadMore () {
         if (!this.data.hasMore) return;
 

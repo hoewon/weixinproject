@@ -198,14 +198,14 @@ Page({
   tapTag: function(event) {
     console.log(event)
 
-    let tag = event.target.id;
-    let title = event.target.dataset.title;
+    let tag = event.currentTarget.id;
+    let title = event.currentTarget.dataset.title;
     this.toTag(tag,title);
   },
   toCaption(e){
     console.log('历史跳转')
     console.log(e)
-    let {key,title} = e.target.dataset;
+    let {key,title} = e.currentTarget.dataset;
     console.log(key)
     console.log(title)
     if(!title){
@@ -247,7 +247,7 @@ Page({
     let {caption} = this.data;
     //等价let caption = this.data.caption;
     //key: id, title: title, type: 'tag',
-    caption.unshift({key: e.target.dataset.id, title:e.target.dataset.title, type: 'tag'});
+    caption.unshift({key: e.currentTarget.dataset.id, title:e.currentTarget.dataset.title, type: 'tag'});
     caption = u.removeDuplicates(caption, "key");
     caption = caption.slice(0, 5);
     this.setData({
@@ -266,8 +266,8 @@ Page({
         console.log(res)
       }
     })
-    let key = e.target.dataset.id;
-    let title = e. target.title;
+    let key = e.currentTarget.dataset.id;
+    let title = e. currentTarget.title;
 
       wx.navigateTo({
         //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
@@ -280,8 +280,10 @@ Page({
     console.log('点击2')
     console.log('event',event)
     let {caption} = this.data;
+
+
     //等价let caption = this.data.caption;
-    caption.unshift({key: event.target.dataset.id, type: 'keyword'});
+    caption.unshift({key: event.currentTarget.dataset.id, type: 'keyword'});
     caption = u.removeDuplicates(caption, "key");
     caption = caption.slice(0, 5);
     this.setData({
@@ -299,7 +301,7 @@ Page({
       }
     })
     //console.log(k,'result');
-    let key = event.target.dataset.id;
+    let key = event.currentTarget.dataset.id;
     wx.navigateTo({
       //url="../recipeList/recipeList?sort=keyword&term=11&title=11"
       //url="../recipeList/recipeList?sort=tag&term=57a80572a341310063420ea1&title=21421412"

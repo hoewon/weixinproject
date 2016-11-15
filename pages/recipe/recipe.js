@@ -1,7 +1,7 @@
 // Douban API 操作
 const AV = require('../../utils/av-weapp');
 var app = getApp();
-// const douban = require('../../libraries/douban.js')
+ //const douban = require('../../libraries/douban.js')
 
 // 创建一个页面对象用于控制页面的逻辑
 Page({
@@ -118,7 +118,25 @@ onShow(params){
     wx.setNavigationBarTitle({title: this.data.title});
 
   },
+  tapFive(event){
+    console.log(event);
+    let Id = event.currentTarget.dataset.idfive;
+    let title = event.currentTarget.dataset.titlefive;
+    let page =  getCurrentPages();
+    let url = '../recipe/recipe?id='+Id+'&title='+title
+    console.log(page);
+    if(page.length<3){
+    wx.navigateTo({
+      url:url
+    //  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+    });
+    }else{
+      wx.redirectTo({
+        url:url
+      })
+    }
 
+  },
 
   loadMore () {
     // 这里是用总长来判断是否有更多内容
@@ -148,23 +166,25 @@ onShow(params){
   },
 
   tapTag(event) {
+    console.log('标签！！！！！');
     console.log(event)
+    let Id = event.currentTarget.dataset.idfive;
+    let title = event.currentTarget.dataset.titlefive;
+    let page =  getCurrentPages();
+    //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
+    let url = '../recipeList/recipeList?sort=tag&term=' + Id + '&title=' + title;
 
-    let id = event.target.id;
-    let title = event.target.dataset.title;
-    let page = getCurrentPages();
-    let url = '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title;
-    if(!(page.length>4)){
+    if(page.length<3){
+      wx.navigateTo({
+        url:url
+        //  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+      });
+    }else{
       wx.redirectTo({
-
+        url:url
       })
     }
-    else{
-    wx.navigateTo({
-      //url: '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title?
-      url:url
-    })
-    }
+
   },
 
   tapShare(event){
@@ -218,6 +238,7 @@ onShow(params){
 
 
   },
+
 
   tapSub(e){
     console.log(a2);

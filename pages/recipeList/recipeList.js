@@ -67,4 +67,26 @@ Page({
   onReady () {
     wx.setNavigationBarTitle({title: this.data.title})
   }
+    ,
+    tapFive(event){
+        console.log('首页跳！！！！');
+        console.log(event);
+        let Id = event.currentTarget.dataset.idfive;
+        let title = event.currentTarget.dataset.titlefive;
+        let page =  getCurrentPages();
+        let url = '../recipe/recipe?id='+Id+'&title='+title
+        console.log(page);
+        if(page.length<3){
+            wx.navigateTo({
+                url:url
+                //  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+            });
+        }else{
+            wx.redirectTo({
+                url:url
+            })
+        }
+
+    },
+
 })

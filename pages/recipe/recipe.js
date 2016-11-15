@@ -24,14 +24,16 @@ Page({
     iconP: '../../images/like.png',
     uiconP:'../../images/unlike.png',
     globalData:{
-    }
+    },
+    loaded:false
 
 
   },
 
   onLoad (params) {
+    wx.showNavigationBarLoading();
     const {id, title} = params;
-    console.log(params);
+
 
     this.setData({
       title: title,
@@ -39,7 +41,7 @@ Page({
     console.log(id);
     console.log(title);
 
-     //const video = 'http://ac-4s28kj56.clouddn.com/8a1a5a0e83d5044c9081.mp4';
+    //const video = 'http://ac-4s28kj56.clouddn.com/8a1a5a0e83d5044c9081.mp4';
     const video = "https://dn-4s28kj56.qbox.me/31be8bd7ced64d6d.mp4";
 //初始判断是否收藏
     AV.Cloud.run('isFav', {id: id}, {remote: true})
@@ -47,7 +49,8 @@ Page({
           console.log('o',o)
           // 只触发监听, 不触发本体
           this.setData({
-            isFav: o
+            isFav: o,
+            favorite: o ? this.data.favorite + 1 : this.data.favorite - 1
           });
         }).catch((err) => {
       console.log(err);
@@ -56,51 +59,60 @@ Page({
 
 
 
-     AV.Cloud.run('recipe', {id: id}, {remote: true})
-       .then(o=> {
+    AV.Cloud.run('recipe', {id: id}, {remote: true})
+        .then(o=> {
 
-         console.log(o);
-         // if (d.subjects.length) {
-         this.setData({
-           // title: o.recipe.title,
-           recipe: o.recipe,
-           tags: o.tags,
-           loading: false,
-
+          console.log(o);
+          // if (d.subjects.length) {
+          this.setData({
+            // title: o.recipe.title,
+            recipe: o.recipe,
+            tags: o.tags,
+            loading: false,
+            //loaded:true,
             share:o.recipe.share,
-           favorite: o.recipe.favorite,
-           src: video,
-           desc:o.recipe.desc? o.recipe.desc.slice(0,20) :''
-         })
-       })
-       .catch(e => {
-         this.setData({title: '获取数据异常', recipe: {}, loading: false});
-         console.error(e)
-       });
+            favorite: o.recipe.favorite,
+            src: video,
+            desc:o.recipe.desc? o.recipe.desc.slice(0,20) :''
+          })
+        })
+        .catch(e => {
+          this.setData({title: '获取数据异常', recipe: {}, loading: false});
+          console.error(e)
+        });
 
 
 
     AV.Cloud.run('recipeList', {
-      sort: 'latest',
-      term: '',
-      ex: '',
-      l: this.data.limit,
-      p: this.data.page
-    }, {remote: true})
-      .then(list=> {
-        this.data.page++;
-        // if (d.subjects.length) {
-        this.setData({recipes: list, loading: false});
-        // } else {
-        //   this.setData({hasMore: false, loading: false})
-        // }
-      })
-      .catch(e => {
-        this.setData({subtitle: '获取数据异常', recipes: [], loading: false});
-        console.error(e)
-      })
+          sort: 'latest',
+          term: '',
+          ex: '',
+          l: this.data.limit,
+          p: this.data.page
+        }, {remote: true})
+        .then(list=> {
+          this.data.page++;
+          // if (d.subjects.length) {
+          this.setData({recipes: list, loading: false});
+          // } else {
+          //   this.setData({hasMore: false, loading: false})
+          // }
+        })
+        .catch(e => {
+          this.setData({subtitle: '获取数据异常', recipes: [], loading: false});
+          console.error(e)
+        })
   },
+onShow(params){
+  console.log('onShow');
+  //console.log(params);
+  console.log(getCurrentPages());
+  this.setData({
+    loaded:true,
+  })
 
+
+},
 
   onReady () {
     wx.setNavigationBarTitle({title: this.data.title});
@@ -140,9 +152,19 @@ Page({
 
     let id = event.target.id;
     let title = event.target.dataset.title;
+    let page = getCurrentPages();
+    let url = '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title;
+    if(!(page.length>4)){
+      wx.redirectTo({
+
+      })
+    }
+    else{
     wx.navigateTo({
-      url: '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title
+      //url: '../recipeList/recipeList?sort=tag&term=' + id + '&title=' + title?
+      url:url
     })
+    }
   },
 
   tapShare(event){

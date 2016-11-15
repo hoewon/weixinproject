@@ -1,21 +1,18 @@
-function formatTime(date) {
-  var year = date.getFullYear()
-  var month = date.getMonth() + 1
-  var day = date.getDate()
+function removeDuplicates (arr, prop){
+  var new_arr = [];
+  var lookup = {};
 
-  var hour = date.getHours()
-  var minute = date.getMinutes()
-  var second = date.getSeconds()
+  for (var i in arr) {
+    lookup[arr[i][prop]] = arr[i];
+  }
 
+  for (i in lookup) {
+    new_arr.push(lookup[i]);
+  }
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-}
-
-function formatNumber(n) {
-  n = n.toString()
-  return n[1] ? n : '0' + n
+  return new_arr;
 }
 
 module.exports = {
-  formatTime: formatTime
+  removeDuplicates: removeDuplicates
 }

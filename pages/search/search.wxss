@@ -5,29 +5,32 @@
     background: #fff;
 }
 .search-left{
-    flex: 8;
+    /*flex: 8;*/
+    display: flex;
     background: #4EA3E7;
     text-align: left;
+    align-items:center;
 }
 .search-left input{
     display: inline-block;
-    height: 65rpx;
+    /*height: 65rpx;*/
     font-size: 26rpx;
 }
 .search-placeholder{
     color: #8CCEFD;
-    line-height: 20rpx;
+    /*line-height: 20rpx;*/
 }
-.search .search-left image{
+
+.search-left image{
     display: inline-block;
     width: 35rpx;
     height: 35rpx;
     padding: 15rpx 15rpx 15rpx 20rpx;
 }
-.search .search-right{
+.search-right{
     flex: 1;
 }
-.search .search-right image{
+.search-right image{
     width: 45rpx;
     height: 45rpx;
     padding: 10rpx;

@@ -1,23 +1,14 @@
-<!-- 搜索电影 -->
-<!--<import src="../component/recipe-list.wxml"/>-->
-<!--顶部使用横排还是竖排也待定-->
+
 <form bindsubmit="search" bindreset="formReset">
-    <!--<view class="result-view">-->
-    <!--<icon type="search" size="20" color="{{gray}}"/>-->
-    <!--<view class="search">-->
-    <!--<input class="search-left flex-item" placeholder="{{subtitle}}" name="keyword"-->
-           <!--bindinput="input" bindchange="search" placeholder-class="search-placeholder"/>-->
-    <!--</view>-->
-    <!--</view>-->
     <view class="search">
-        <view class="search-left flex-item">
+        <view class="search-left">
             <image src="../../images/search.png"></image>
             <input placeholder="{{subtitle}}" placeholder-class="search-placeholder"
                    name="keyword" bindinput="input"
             bindchange="search"/>
         </view>
     </view>
-    <view class="search-right flex-item" bindtap="upper">
+    <view class="search-right" bindtap="upper">
         <!--可以加logo--!>
         <!--<button  formType="submit" type="default" loading="{{loading}}"-->
                   <!--disabled="{{disabled}}" hover-class="button-hover">搜索</button>-->

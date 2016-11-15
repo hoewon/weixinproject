@@ -7,32 +7,11 @@ Page({
     limit: 20,
     loading: true,
     hasMore: true,
-    recipes: []
+    recipes: [],
+      loaded:false
   },
-    onLoad(e) {
-        var that = this;
-    },
-
-  loadMore () {
-      if (!this.data.hasMore) return;
 
 
-    AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
-      .then(list=> {
-        console.log(this.data.page);
-
-        if (list.length) {
-        this.setData({recipes: this.data.recipes.concat(list), loading: false})
-        } else {
-          this.setData({hasMore: false, loading: false})
-        }
-        this.data.page++;
-      })
-      .catch(e => {
-        this.setData({recipes: [], loading: false});
-        console.error(e)
-      })
-  },
 
   // 页面加载
   onLoad (params) {
@@ -54,6 +33,7 @@ Page({
       .then(list=> {
         if (list.length) {
         this.setData({recipes: list, loading: false})
+
         } else {
           this.setData({hasMore: false, loading: false})
         }
@@ -69,6 +49,33 @@ Page({
 
       });
   },
+    onShow (params){
+        wx.showNavigationBarLoading();
+
+
+
+        // 类型： in_theaters  coming_soon  us_box
+
+
+        AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+            .then(list=> {
+                if (list.length) {
+                    this.setData({recipes: list, loading: false})
+                } else {
+                    this.setData({hasMore: false, loading: false})
+                }
+                this.data.page++;
+
+                wx.hideNavigationBarLoading()
+
+            })
+            .catch(e => {
+                this.setData({recipes: [], loading: false});
+                // console.error(e);
+                wx.hideNavigationBarLoading()
+
+            });
+    },
 
   onPullDownRefreash(){
     AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
@@ -89,5 +96,25 @@ Page({
         wx.hideNavigationBarLoading()
 
       });
-  }
+  },
+    loadMore () {
+        if (!this.data.hasMore) return;
+
+
+        AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+            .then(list=> {
+                console.log(this.data.page);
+
+                if (list.length) {
+                    this.setData({recipes: this.data.recipes.concat(list), loading: false})
+                } else {
+                    this.setData({hasMore: false, loading: false})
+                }
+                this.data.page++;
+            })
+            .catch(e => {
+                this.setData({recipes: [], loading: false});
+                console.error(e)
+            })
+    }
 })

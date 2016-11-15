@@ -85,6 +85,33 @@ Page({
 
             });
     },
+    onShow:function(){
+        wx.showNavigationBarLoading();
+
+
+
+        // 类型： in_theaters  coming_soon  us_box
+
+
+        AV.Cloud.run('recipeList', {sort: 'favorite', term: 'objectId', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+            .then(list=> {
+                if (list.length) {
+                    this.setData({recipes: list, loading: false})
+                } else {
+                    this.setData({hasMore: false, loading: false})
+                }
+                this.data.page++;
+
+                wx.hideNavigationBarLoading()
+
+            })
+            .catch(e => {
+                this.setData({recipes: [], loading: false});
+                // console.error(e);
+                wx.hideNavigationBarLoading()
+
+            });
+    },
 
     onPullDownRefreash(){
         AV.Cloud.run('recipeList', {sort: 'favorite', term: 'objectId', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})

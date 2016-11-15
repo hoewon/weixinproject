@@ -1,20 +1,24 @@
 <!-- 电影明细 -->
-<template name="thumb">
-    <navigator url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}">
-        <view class="thumb">
-            <image class="thumb-image" src="{{item.image}}?imageView2/1/w/320/h/180"/>
-            <view class="thumb-right">
-                <text class="thumb-right-title">{{item.title}}</text>
-                <text class="thumb-right-subtitle">{{item.tag.title}} · {{item.date}}</text>
-            </view>
-        </view>
-    </navigator>
-</template>
+<import src="../component/recipe-list.wxml"/>
+<!--<template name="thumb">-->
+    <!--<navigator url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}">-->
+        <!--<view class="thumb">-->
+            <!--<image class="thumb-image" src="{{item.image}}?imageView2/1/w/320/h/180"/>-->
+            <!--<view class="thumb-right">-->
+                <!--<text class="thumb-right-title">{{item.title}}</text>-->
+                <!--<text class="thumb-right-subtitle">{{item.tag.title}} · {{item.date}}</text>-->
+            <!--</view>-->
+        <!--</view>-->
+    <!--</navigator>-->
+<!--</template>-->
 
 <loading hidden="{{!loading}}">
 加载中...
 </loading>
+<view wx:if="{{loaded}}">
 <scroll-view scroll-y="true" wx:if="{{recipe.title}}" bindscrolltolower="loadMore">
+
+
     <view class="head">
         <video class="video" src="{{src}}" binderror="videoErrorCallback"></video>
         <view class="title-view">
@@ -67,4 +71,10 @@
             <text>没有更多内容了</text>
         </view>
     </view>
+
+
 </scroll-view>
+</view>
+<view wx:else>
+    <view>aaa</view>
+</view>

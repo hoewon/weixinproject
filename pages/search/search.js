@@ -1,6 +1,8 @@
 // Douban API 操作
 //const douban = require('../../libraries/douban.js');
 const AV = require('../../utils/av-weapp');
+const u = require('../../utils/util');
+
 
 // 创建一个页面对象用于控制页面的逻辑
 Page({
@@ -24,6 +26,7 @@ Page({
   },
 //页面加载
   onLoad(){
+    wx.showNavigationBarLoading();
     AV.Cloud.run('categoryList', {sort: 'hot', term: '', ex: '', l: 9, p: ''}, {remote: true})
       .then((o)=> {
         //console.log(o);
@@ -84,6 +87,71 @@ Page({
       // Do something when catch error
     }
   ,
+  onShow:function(){
+    console.log('onshow');
+   this.load()
+
+  },
+  load(){
+    wx.showNavigationBarLoading();
+    AV.Cloud.run('categoryList', {sort: 'hot', term: '', ex: '', l: 9, p: ''}, {remote: true})
+        .then((o)=> {
+          //console.log(o);
+          this.setData({
+            hot: o ? o : [],
+
+          });
+        })
+
+
+
+    //wx.clearStorage()
+    // 获取本地存取
+    let _this = this;
+    wx.getStorage({
+      key: 'caption',
+      //如果有数据
+      success: function(res) {
+        console.log('成功')
+        console.log('res'+res)
+
+        console.log('data'+res.data)
+        console.log('输出')
+        //定义一个变量，解包数据
+        let a = JSON.parse(res.data);
+        //加载数据
+        _this.setData({
+          caption: a,
+          disable:true
+        })
+
+      },
+
+      //如果没有数据
+      fail: function(res){
+        console.log('失败')
+        console.log(res)
+        //console.log('asds',a);
+        //添加一个空数据
+        let o =[
+
+        ]
+        _this.setData({
+          disable:false
+        })
+        wx.setStorage({
+          key:'caption',
+          //object
+          // data:JSON.stringify([])
+          data:JSON.stringify(o),
+          success:function(res){
+            console.log('失败后赋值')
+            console.log(res)
+          }
+        })
+      }
+    })
+  },
 
   input(e){
     console.log(e.detail.value,'tag 出口 转向taglist');
@@ -180,7 +248,7 @@ Page({
     //等价let caption = this.data.caption;
     //key: id, title: title, type: 'tag',
     caption.unshift({key: e.target.dataset.id, title:e.target.dataset.title, type: 'tag'});
-    //let t = tools.removeDuplicates(list, "key");
+    caption = u.removeDuplicates(caption, "key");
     caption = caption.slice(0, 5);
     this.setData({
       caption: caption,
@@ -214,6 +282,7 @@ Page({
     let {caption} = this.data;
     //等价let caption = this.data.caption;
     caption.unshift({key: event.target.dataset.id, type: 'keyword'});
+    caption = u.removeDuplicates(caption, "key");
     caption = caption.slice(0, 5);
     this.setData({
       caption: caption,

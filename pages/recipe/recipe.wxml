@@ -44,7 +44,7 @@
         <view class="buttons">
             <view class="button" bindtap="tapShare" >
                 <icon type="success" size="25" color="{{isShare?'red':'orange'}}"/>
-                <text>{{share}}</text>
+                <text>{{share}}aaa</text>
             </view>
             <view class="button" bindtap="tapFav" >
                 <!--<icon type="success" size="25"  color="{{isFav?'red':'orange'}}"/>-->

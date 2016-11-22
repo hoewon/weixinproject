@@ -188,9 +188,10 @@ onShow(params){
 
   },
 
+
   tapShare(event){
     AV.Cloud.run('fav',{id: this.data.recipe.objectId, isShare: this.data.isFav}, {remote: true}).then((o)=>{
-      console.log(o)
+      console.log("分享",o);
       this.setData({
         isShare:o,
         share: this.data.share+1
@@ -198,6 +199,28 @@ onShow(params){
     }).catch((err) => {
       console.log(err);
     })
+
+    //分享功能，微信未开放接口
+    //function share(){
+    //  console.log('share,分享');
+    //
+    //
+    //}
+    //
+    //
+    //wx.showActionSheet({
+    //  itemList: ['分享', 'B', 'C'],
+    //  success: function(res) {
+    //    if (!res.cancel) {
+    //      console.log("???",res.tapIndex)
+    //     if(res.tapIndex==0){
+    //       console.log('分享');
+    //        //sh();
+    //       share();
+    //     }
+    //    }
+    //  }
+    //})
   },
   tapFav(event){
     //收藏

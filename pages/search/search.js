@@ -20,7 +20,7 @@ Page({
     //输入开关
     display:true,
     //清除开关
-    disable:true
+    //disable:true
 
     // hasMore: false,
   },
@@ -55,7 +55,7 @@ Page({
         //加载数据
         _this.setData({
           caption: a,
-          disable:true
+          //disable:true
             })
 
       },
@@ -69,9 +69,9 @@ Page({
         let o =[
 
         ]
-        _this.setData({
-          disable:false
-        })
+        //_this.setData({
+          //disable:false
+        //})
         wx.setStorage({
           key:'caption',
           //object
@@ -122,7 +122,7 @@ Page({
         //加载数据
         _this.setData({
           caption: a,
-          disable:true
+          //disable:true
         })
 
       },
@@ -136,9 +136,9 @@ Page({
         let o =[
 
         ]
-        _this.setData({
-          disable:false
-        })
+        //_this.setData({
+        //  disable:false
+        //})
         wx.setStorage({
           key:'caption',
           //object
@@ -235,7 +235,7 @@ Page({
   })
   this.setData({
     caption:[],
-    disable:false
+    //disable:false
   })}
   ,
   //弹出框搜索
@@ -252,7 +252,7 @@ Page({
     caption = caption.slice(0, 5);
     this.setData({
       caption: caption,
-      disable:true
+      //disable:true
     });
 
     console.log(caption);
@@ -288,7 +288,7 @@ Page({
     caption = caption.slice(0, 5);
     this.setData({
       caption: caption,
-      disable:true
+      //disable:true
     });
     console.log(caption);
     wx.setStorage({

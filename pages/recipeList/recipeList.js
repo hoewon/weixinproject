@@ -6,7 +6,8 @@ Page({
     limit: 20,
     loading: true,
     hasMore: true,
-    recipes: []
+    recipes: [],
+      share:false
   },
 
   loadMore () {
@@ -39,6 +40,12 @@ Page({
   onLoad (params) {
     wx.showNavigationBarLoading();
     let {sort, term, title} = params;
+      if(sort=='tag'){
+          this.setData({
+            share:true
+          })
+      }
+
     if (!sort && !term) {
       sort = 'hottest',
         term = 'weekly'

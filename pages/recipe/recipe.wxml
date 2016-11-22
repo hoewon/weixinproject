@@ -8,8 +8,11 @@
 </template>
 
 <loading hidden="{{!loading}}">
+<view>
 加载中...
+</view>
 </loading>
+<block>
 <view wx:if="{{loaded}}">
 <scroll-view scroll-y="true" wx:if="{{recipe.title}}" bindscrolltolower="loadMore">
 
@@ -21,7 +24,6 @@
         </view>
         <view class="subtitle-view" bindtap="tapSub">
             <text class="subtitle">{{tags[0].title}} · {{recipe.date}}</text>
-            <!--<icon class="right" animation="{{a2}}" type="waiting" size="25" rotate="45" color="{{isFav?'red':'orange'}}"/>-->
             <image src="../../images/less.png" class="right" animation="{{a2}}"  type="success"
                    color="{{isFav?'red':'orange'}}"></image>
         </view>
@@ -47,7 +49,7 @@
                 <text>{{share}}aaa</text>
             </view>
             <view class="button" bindtap="tapFav" >
-                <!--<icon type="success" size="25"  color="{{isFav?'red':'orange'}}"/>-->
+
                 <image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"
                        color="{{isFav?'red':'orange'}}">{{iconP}}</image>
                 <text>{{favorite}}</text>
@@ -56,7 +58,6 @@
     </view>
     <!--关联列表-->
     <view class="thumb-view">
-        <!--<template is="thumb" />-->
         <view  class="thumb" data="{{item}}" wx:for="{{recipes}}"
               data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
         <navigator class="thumbclicd" >
@@ -84,3 +85,4 @@
 <view wx:else>
     <view>aaa</view>
 </view>
+</block>

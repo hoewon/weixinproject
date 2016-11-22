@@ -132,5 +132,24 @@ Page({
                 wx.hideNavigationBarLoading()
 
             });
+    },  tapFive(event){
+        console.log(event);
+        console.log('跳！！！！！！！');
+        let Id = event.currentTarget.dataset.idfive;
+        let title = event.currentTarget.dataset.titlefive;
+        let page =  getCurrentPages();
+        let url = '../recipe/recipe?id='+Id+'&title='+title
+        console.log(page);
+        if(page.length<3){
+            wx.navigateTo({
+                url:url
+                //  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+            });
+        }else{
+            wx.redirectTo({
+                url:url
+            })
+        }
+
     }
 })

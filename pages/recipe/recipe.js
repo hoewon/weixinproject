@@ -1,7 +1,7 @@
 // Douban API 操作
 const AV = require('../../utils/av-weapp');
 var app = getApp();
- //const douban = require('../../libraries/douban.js')
+//const douban = require('../../libraries/douban.js')
 
 // 创建一个页面对象用于控制页面的逻辑
 Page({
@@ -33,7 +33,7 @@ Page({
   onLoad (params) {
     wx.showNavigationBarLoading();
     const {id, title} = params;
-
+  console.log(params);
 
     this.setData({
       title: title,
@@ -62,7 +62,7 @@ Page({
     AV.Cloud.run('recipe', {id: id}, {remote: true})
         .then(o=> {
 
-          console.log(o);
+          console.log('o!!!!!!!oooo',o);
           // if (d.subjects.length) {
           this.setData({
             // title: o.recipe.title,
@@ -103,16 +103,16 @@ Page({
           console.error(e)
         })
   },
-onShow(params){
-  console.log('onShow');
-  //console.log(params);
-  console.log(getCurrentPages());
-  this.setData({
-    loaded:true,
-  })
+  onShow(params){
+    console.log('onShow');
+    //console.log(params);
+    console.log(getCurrentPages());
+    this.setData({
+      loaded:true,
+    })
 
 
-},
+  },
 
   onReady () {
     wx.setNavigationBarTitle({title: this.data.title});
@@ -127,10 +127,10 @@ onShow(params){
     let url = '../recipe/recipe?id='+Id+'&title='+title
     console.log(page);
     if(page.length<3){
-    wx.navigateTo({
-      url:url
-    //  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
-    });
+      wx.navigateTo({
+        url:url
+        //  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+      });
     }else{
       wx.redirectTo({
         url:url
@@ -146,24 +146,24 @@ onShow(params){
 
     this.setData({subtitle: '加载中...', loading: true});
     AV.Cloud.run('recipeList', {
-      sort: 'latest',
-      term: '',
-      ex: '',
-      l: this.data.limit,
-      p: this.data.page
-    }, {remote: true})
-      .then(d => {
-        this.data.page++;
-        if (d.length) {
-          this.setData({recipes: this.data.recipes.concat(d), loading: false})
-        } else {
-          this.setData({hasMore: false, loading: false})
-        }
-      })
-      .catch(e => {
-        this.setData({subtitle: '获取数据异常', loading: false});
-        console.error(e)
-      })
+          sort: 'latest',
+          term: '',
+          ex: '',
+          l: this.data.limit,
+          p: this.data.page
+        }, {remote: true})
+        .then(d => {
+          this.data.page++;
+          if (d.length) {
+            this.setData({recipes: this.data.recipes.concat(d), loading: false})
+          } else {
+            this.setData({hasMore: false, loading: false})
+          }
+        })
+        .catch(e => {
+          this.setData({subtitle: '获取数据异常', loading: false});
+          console.error(e)
+        })
   },
 
   tapTag(event) {
@@ -240,23 +240,23 @@ onShow(params){
         }).catch(console.error);
       },
       fail:({userInfo})=>{
-            AV.User.loginWithWeapp().then(user => {
-              console.log('登陆')
-              this.globalData.user = user.toJSON();
-            }).catch(console.error);
-          }
+        AV.User.loginWithWeapp().then(user => {
+          console.log('登陆')
+          this.globalData.user = user.toJSON();
+        }).catch(console.error);
+      }
 
     });
 
     AV.Cloud.run('fav', {id: this.data.recipe.objectId, isFav: this.data.isFav}, {remote: true})
-      .then((o)=> {
-        console.log('o',o)
-        // 只触发监听, 不触发本体
-        this.setData({
-          isFav: o,
-          favorite: o ? this.data.favorite + 1 : this.data.favorite - 1
-        });
-      }).catch((err) => {
+        .then((o)=> {
+          console.log('o',o)
+          // 只触发监听, 不触发本体
+          this.setData({
+            isFav: o,
+            favorite: o ? this.data.favorite + 1 : this.data.favorite - 1
+          });
+        }).catch((err) => {
       console.log(err);
     })
 
@@ -265,7 +265,7 @@ onShow(params){
 
 
   tapSub(e){
-    console.log(a2);
+    console.log(e);
     var a1 = wx.createAnimation({
       duration: 5000,
       timingFunction: 'linear',
@@ -275,10 +275,6 @@ onShow(params){
       duration: 500,
       timingFunction: 'linear',
 
-    })
-    var a2 = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'linear'
     })
     if (this.data.draw) {
       a1.height('auto').step();
@@ -298,7 +294,4 @@ onShow(params){
       })
     }
   }
-
-
-
 })

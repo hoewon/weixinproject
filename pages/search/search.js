@@ -1,5 +1,3 @@
-// Douban API 操作
-//const douban = require('../../libraries/douban.js');
 const AV = require('../../utils/av-weapp');
 const u = require('../../utils/util');
 
@@ -19,6 +17,7 @@ Page({
     tags:[],
     //输入开关
     display:true,
+    text:''
     //清除开关
     //disable:true
 
@@ -28,18 +27,18 @@ Page({
   onLoad(){
     wx.showNavigationBarLoading();
     AV.Cloud.run('categoryList', {sort: 'hot', term: '', ex: '', l: 9, p: ''}, {remote: true})
-      .then((o)=> {
-        //console.log(o);
-        this.setData({
-          hot: o ? o : [],
+        .then((o)=> {
+          //console.log(o);
+          this.setData({
+            hot: o ? o : [],
 
-        });
-      })
+          });
+        })
 
 
 
-   //wx.clearStorage()
-   // 获取本地存取
+    //wx.clearStorage()
+    // 获取本地存取
     let _this = this;
     wx.getStorage({
       key: 'caption',
@@ -50,13 +49,13 @@ Page({
 
         console.log('data'+res.data)
         console.log('输出')
-       //定义一个变量，解包数据
+        //定义一个变量，解包数据
         let a = JSON.parse(res.data);
         //加载数据
         _this.setData({
           caption: a,
           //disable:true
-            })
+        })
 
       },
 
@@ -70,7 +69,7 @@ Page({
 
         ]
         //_this.setData({
-          //disable:false
+        //disable:false
         //})
         wx.setStorage({
           key:'caption',
@@ -84,12 +83,12 @@ Page({
         })
       }
     })
-      // Do something when catch error
-    }
+    // Do something when catch error
+  }
   ,
   onShow:function(){
     console.log('onshow');
-   this.load()
+    this.load()
 
   },
   load(){
@@ -165,15 +164,15 @@ Page({
       console.log(' 输入值');
 
       AV.Cloud.run('categoryList', {sort: 'search', term: text, ex: '', l: 5, p: 0}, {remote: true})
-        .then((r)=> {
-          this.setData({
-            loading:false,
-            tags: r?r:[]
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        })
+          .then((r)=> {
+            this.setData({
+              loading:false,
+              tags: r?r:[]
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          })
     }else{
       this.setData({
         tags:[],
@@ -182,7 +181,13 @@ Page({
       console.log('输入框空')
     }
   },
+cleartext(){
+  this.setData({
+    text:'',
+    display:true
+  });
 
+},
   search (e) {
     console.log(e);
     // console.log(e.detail.value, 'keyword 出口 转向result');
@@ -227,16 +232,16 @@ Page({
     console.log('清除')
     //添加一个空数据
     wx.setStorage({
-          key:'caption',
-          //object
-          // data:JSON.stringify([])
-          data:JSON.stringify([])
+      key:'caption',
+      //object
+      // data:JSON.stringify([])
+      data:JSON.stringify([])
 
-  })
-  this.setData({
-    caption:[],
-    //disable:false
-  })}
+    })
+    this.setData({
+      caption:[],
+      //disable:false
+    })}
   ,
   //弹出框搜索
   toTag(e){
@@ -269,11 +274,11 @@ Page({
     let key = e.currentTarget.dataset.id;
     let title = e. currentTarget.title;
 
-      wx.navigateTo({
-        //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
-        url: '../recipeList/recipeList?sort=tag&term=' + key + '&title=' + title
-      });
-    }
+    wx.navigateTo({
+      //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
+      url: '../recipeList/recipeList?sort=tag&term=' + key + '&title=' + title
+    });
+  }
   ,
   //搜索框搜索
   toResult(event){

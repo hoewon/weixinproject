@@ -1,5 +1,6 @@
 <import src="../component/recipe-list.wxml"/>
 
+<!--<view>{{title}}</view>-->
+<!--<text wx:if="{{share}}">{{tkl}}</text>-->
 
-<view wx:if="{{share}}">标签</view>
 <template is="recipe-list" data="{{ recipes, loading, hasMore, loadMore }}"/>

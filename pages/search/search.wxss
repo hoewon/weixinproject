@@ -1,20 +1,44 @@
 .search{
     width: 735rpx;
-    height: 65rpx;
+    height: 140rpx;
     padding: 12.5rpx 0 12.5rpx 15rpx;
     background: #fff;
 }
 .search-left{
     /*flex: 8;*/
+
     display: flex;
     background: #4EA3E7;
-    text-align: left;
-    align-items:center;
+    /*flex-wrap: nowrap;*/
+    /*text-align: left;*/
+    margin-top: 6rpx;
+    height: 140rpx;
+    /*justify-content: space-between;*/
+    align-items: center;
+
+}
+.input{
+    position: absolute;
+    overflow: hidden;
+    flex-basis: auto;
+    left:70rpx;
+    top:20rpx;
+    height: 140rpx;
+    font-size: 17pt;
+}
+.clear{
+    position: absolute;
+    right:20rpx;
+    top:70rpx;
+    height:25rpx;
+
+    width:25rpx;
 }
 .search-left input{
     display: inline-block;
-    /*height: 65rpx;*/
-    font-size: 26rpx;
+    flex-basis: auto;
+    height: 140rpx;
+    font-size: 17pt;
 }
 .search-placeholder{
     color: #8CCEFD;
@@ -23,10 +47,12 @@
 
 .search-left image{
     display: inline-block;
+    flex-basis: auto;
     width: 35rpx;
     height: 35rpx;
     padding: 15rpx 15rpx 15rpx 20rpx;
 }
+
 .search-right{
     flex: 1;
 }
@@ -35,12 +61,15 @@
     height: 45rpx;
     padding: 10rpx;
 }
-icon{
+
+.icon{
     padding: 16rpx;
     right:20rpx;
     position: absolute;
+
     height:25rpx;
     width:25rpx;
+    flex-basis: auto;
 }
 
 
@@ -53,7 +82,7 @@ icon{
 }
 
 .result-text {
-    font-size: 32rpx;
+    font-size: 14pt;
 }
 
 .result-text-right:before
@@ -99,7 +128,7 @@ icon{
 
 .hot-title-text {
     color: lightgray;
-    font-size:30rpx;
+    font-size:13pt;
 }
 
 .hot-button-view {
@@ -123,5 +152,5 @@ icon{
 
 
 .hot-button-text {
-    font-size: 32rpx;
+    font-size: 14pt;
 }

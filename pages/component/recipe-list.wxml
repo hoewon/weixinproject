@@ -1,27 +1,27 @@
 
 <template name="recipe-list">
-<scroll-view scroll-y="true" class="recipe-list-body" bindscrolltolower="loadMore">
+    <scroll-view scroll-y="true" class="recipe-list-body" bindscrolltolower="loadMore">
 
-    <view  data="{{item}}" wx:for="{{recipes}}">
-    <navigator data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
-        <view class="recipeFull">
-            <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
-            <view class="cover">
-                <text class="title">{{item.title}}</text>
-                <text class="subtitle">{{item.tag.title}} · {{item.date}} · {{item.duration}}</text>
+        <view  data="{{item}}" wx:for="{{recipes}}">
+            <navigator data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
+                <view class="recipeFull">
+                    <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
+                    <view class="cover">
+                        <text class="title">{{item.title}}</text>
+                        <text class="subtitle">{{item.tag.title}} · {{item.date}} · {{item.duration}}</text>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="tips">
+            <view wx:if="{{hasMore}}">
+                <image src="/images/loading.gif" mode="aspectFill"/>
+                <text>加载更多...</text>
+            </view>
+            <view wx:else>
+                <text>无更多内容</text>
             </view>
         </view>
-    </navigator>
-    </view>
-    <view class="tips">
-        <view wx:if="{{hasMore}}">
-            <image src="/images/loading.gif" mode="aspectFill"/>
-            <text>加载更多...</text>
-        </view>
-        <view wx:else>
-            <text>无更多内容</text>
-        </view>
-    </view>
-</scroll-view>
-<loading hidden="{{!loading}}">加载中...</loading>
+    </scroll-view>
+    <loading hidden="{{!loading}}">加载中...</loading>
 </template>

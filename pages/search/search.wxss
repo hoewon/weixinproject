@@ -1,6 +1,6 @@
 .search{
     width: 735rpx;
-    height: 140rpx;
+    height: 90rpx;
     padding: 12.5rpx 0 12.5rpx 15rpx;
     background: #fff;
 }
@@ -12,7 +12,7 @@
     /*flex-wrap: nowrap;*/
     /*text-align: left;*/
     margin-top: 6rpx;
-    height: 140rpx;
+    height: 90rpx;
     /*justify-content: space-between;*/
     align-items: center;
 
@@ -21,15 +21,15 @@
     position: absolute;
     overflow: hidden;
     flex-basis: auto;
-    left:70rpx;
     top:20rpx;
-    height: 140rpx;
+    left:75rpx;
+    height: 50rpx;
     font-size: 17pt;
 }
 .clear{
     position: absolute;
     right:20rpx;
-    top:70rpx;
+    top:40rpx;
     height:25rpx;
 
     width:25rpx;
@@ -37,7 +37,7 @@
 .search-left input{
     display: inline-block;
     flex-basis: auto;
-    height: 140rpx;
+    height: 80rpx;
     font-size: 17pt;
 }
 .search-placeholder{
@@ -48,8 +48,8 @@
 .search-left image{
     display: inline-block;
     flex-basis: auto;
-    width: 35rpx;
-    height: 35rpx;
+    width: 40rpx;
+    height: 40rpx;
     padding: 15rpx 15rpx 15rpx 20rpx;
 }
 
@@ -118,7 +118,7 @@
 
 .hot-title-view {
     display: flex;
-    margin-top: 6rpx;
+    margin-top: 5rpx;
     height: 60rpx;
     padding-left: 30rpx;
     /*justify-content: center;*/
@@ -141,9 +141,9 @@
 
 .hot-button {
     display: flex;
-    width: 248rpx;
+    width: 249rpx;
     height: 80rpx;
-    margin-top: 3rpx;
+    margin-top: 5rpx;
     background-color: #fff;
     justify-content: center;
     align-items: center;

@@ -54,7 +54,7 @@
 </navigate>
 </view>
 <block wx:if="{{display}}">
-<navigator class="tag-button"  >
+<!--<navigator class="tag-button"  >-->
     <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
     <view wx:if="{{caption.length>0}}">
         <view class="hot-title-view">
@@ -62,7 +62,7 @@
             <icon bindtap="toClear"
                   class="icon" type="clear" size="12" color="#ccc"/>
         </view>
-        <view class="result-view result-tag-view"  bindtap="toCaption"
+        <navigator class="result-view result-tag-view"  bindtap="toCaption"
               data-id="{{item.id}}"
               data-key="{{item.key}}"
               data-title="{{item.title}}"
@@ -71,20 +71,19 @@
             <!--data-title="{{item.title}}"-->
             <!--bindtap="toTag"-->
             <text class="result-text">{{item.title?item.title:item.key}}</text>
-        </view>
+        </navigator>
     </view>
-</navigator>
+<!--</navigator>-->
 <view class="hot" wx:if="{{display}}">
     <view class="hot-title-view">
         <text class="hot-title-text">流行搜索</text>
     </view>
     <view class="hot-button-view">
-        <view class="hot-button" wx:for="{{hot}}">
-            <navigator class="hot-button"
-                       url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+        <navigator class="hot-button" wx:for="{{hot}}"  url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+            <view class="hot-button">
                 <text class="hot-button-text">{{item.title}}</text>
-            </navigator>
-        </view>
+            </view>
+        </navigator>
     </view>
 </view>
 </block>

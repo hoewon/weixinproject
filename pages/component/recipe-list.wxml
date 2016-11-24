@@ -3,7 +3,7 @@
     <scroll-view scroll-y="true" class="recipe-list-body" bindscrolltolower="loadMore">
 
         <view  data="{{item}}" wx:for="{{recipes}}">
-            <navigator data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
+            <navigator  data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
                 <view class="recipeFull">
                     <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
                     <view class="cover">

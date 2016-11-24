@@ -35,7 +35,7 @@
                         <text class="desc">{{recipe.desc}} 来源{{recipe.cook.username}}</text>
                     </view>
                     <view  class="tags">
-                        <navigator class="tag-button"  bindtap="tapTag"
+                        <navigator  class="tag-button"  bindtap="tapTag"
                                     wx:for="{{tags}}" data-idfive="{{item.objectId}}"
                                    data-titlefive="{{item.title}}">
 

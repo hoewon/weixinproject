@@ -1,27 +1,29 @@
-<form bindsubmit="search" bindreset="formReset">
-    <view class="search">
-        <view class="search-left">
-            <image src="../../images/search.png"></image>
+<view class="weui-search-bar">
+<form class="weui-search-bar_form" bindsubmit="" bindreset="formReset">
+    <view class="weui-search-bar_box">
+            <image class="weui-image-search" src="../../images/search.png"></image>
 
-            <input class="input" placeholder="{{subtitle}}" placeholder-class="search-placeholder"
+            <input class="weui-search-bar_input" placeholder="{{subtitle}}" placeholder-class="search-placeholder"
                    name="keyword" bindinput="input"
                    bindchange="search" value="{{text}}"/>
 
-            <icon wx:if="{{!display}}"  class="clear" bindtap="cleartext" type="clear" size="14" color="#fff"/>
+
+            <icon wx:if="{{!display}}"  class="weui-icon-clear" bindtap="cleartext" type="clear" />
+</view>
 
 
-        </view>
 
 
 
-    </view>
-    <view class="search-right" bindtap="upper">
+
+    <view class="" bindtap="upper">
         <!--可以加logo--!>
         <!--<button  class="icon" formType="submit" type="default" loading="{{loading}}"-->
         <!--disabled="{{disabled}}" hover-class="button-hover">搜索</button>-->
     </view>
 
 </form>
+</view>
 
         <!--搜索结果-->
 <view wx:if="{{loaded}}">
@@ -33,15 +35,21 @@
 
 <view class="result">
 <!--wx:if="{{text.length}}"-->
-<block class="result-title" wx:if="{{!display}}">
+<view class="result-title " wx:if="{{!display}}">
     <!--url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}-->
-
-    <navigator class="result-view"  wx:if="{{text.length}}" data-id="{{text}}"  bindtap="toResult">
+    <navigator class="result-view result-tag-view" data-id="{{text}}"  bindtap="toResult">
+    <view class="result-view "  wx:if="{{text.length}}" >
+        <image class="result-image-search" src="../../images/search.png"></image>
         <!--<icon type="search" size="20" color="{{gray}}"/>-->
         <text class="result-text result-text-right">{{text}}</text>
-        <text class="result-text right">></text>
-    </navigator>
-</block>
+        <!--<text class="result-text right">></text>-->
+        <image  class="right" src="../../images/arrowright.png"></image>
+
+    </view>
+</navigator>
+
+
+</view>
 <navigate class="tag-button"  >
     <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
     <view class="result-view result-tag-view" wx:for="{{tags}}"
@@ -57,7 +65,7 @@
 <!--<navigator class="tag-button"  >-->
     <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
     <view wx:if="{{caption.length>0}}">
-        <view class="hot-title-view">
+        <view class="hot-title-view result-tag-view">
             <text class="hot-title-text">搜索记录</text>
             <icon bindtap="toClear"
                   class="icon" type="clear" size="12" color="#ccc"/>

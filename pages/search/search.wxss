@@ -170,7 +170,7 @@
     right: 20rpx;
     width: 28rpx;
     height: 28rpx;
-    top:150rpx;
+    /*top:150rpx;*/
 
 
 }

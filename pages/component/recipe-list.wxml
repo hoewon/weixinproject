@@ -5,11 +5,12 @@
         <view  data="{{item}}" wx:for="{{recipes}}">
             <navigator  data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
                 <view class="recipeFull">
-                    <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
                     <view class="cover">
                         <text class="title">{{item.title}}</text>
                         <text class="subtitle">{{item.tag.title}} · {{item.date}} · {{item.duration}}</text>
                     </view>
+                    <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
+
                 </view>
             </navigator>
         </view>

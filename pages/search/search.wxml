@@ -33,12 +33,12 @@
 </view>
 
 
-<view class="result">
+<view class="result" wx:if="{{!display}}">
 <!--wx:if="{{text.length}}"-->
-<view class="result-title " wx:if="{{!display}}">
+<view class="result-title " >
     <!--url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}-->
-    <navigator class="result-view result-tag-view" data-id="{{text}}"  bindtap="toResult">
-    <view class="result-view "  wx:if="{{text.length}}" >
+    <navigator  class="result-view result-tag-view" data-id="{{text}}"  bindtap="toResult">
+    <view class="result-view "   >
         <image class="result-image-search" src="../../images/search.png"></image>
         <!--<icon type="search" size="20" color="{{gray}}"/>-->
         <text class="result-text result-text-right">{{text}}</text>

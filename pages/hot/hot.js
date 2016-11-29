@@ -41,7 +41,7 @@ Page({
   }
   ,
   onShow (){
-      console.log('onShow');
+      console.log('onShow排行');
       this.refresh();
 
   },
@@ -72,7 +72,7 @@ Page({
     },
     upper(){
         wx.showNavigationBarLoading();
-        console.log("upper");
+        console.log("排行upper");
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
     }

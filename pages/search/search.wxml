@@ -65,7 +65,7 @@
 <!--<navigator class="tag-button"  >-->
     <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
     <view wx:if="{{caption.length>0}}">
-        <view class="hot-title-view result-tag-view">
+        <view class="hot-title-view">
             <text class="hot-title-text">搜索记录</text>
             <icon bindtap="toClear"
                   class="icon" type="clear" size="12" color="#ccc"/>
@@ -82,17 +82,19 @@
         </navigator>
     </view>
 <!--</navigator>-->
-    <view class="hot" wx:if="{{display}}">
-        <view class="hot-title-view">
+    <view class="hot-p" wx:if="{{display}}">
+        <view class="hot-title-search">
             <text class="hot-title-text">流行搜索</text>
         </view>
-        <view class="hot-button-view">
-            <navigator class="hot-button" wx:for="{{hot}}"  url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
-                <view class="hot-button">
-                    <text class="hot-button-text">{{item.title}}</text>
+        <view class="hot">
+                <view class="hot-button-view">
+                    <navigator class="hot-button" wx:for="{{hot}}"  url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+                        <view class="hot-button">
+                            <text class="hot-button-text">{{item.title}}</text>
+                        </view>
+                    </navigator>
                 </view>
-            </navigator>
-        </view>
+            </view>
     </view>
 </block>
 

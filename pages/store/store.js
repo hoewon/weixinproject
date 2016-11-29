@@ -12,25 +12,25 @@ Page({
 
     loadMore () {
         // 获得当前登录用户
-        const user = AV.User.current();
-// 调用小程序 API，得到用户信息
-        wx.getUserInfo({
-            success: ({userInfo}) => {
-                // 更新当前用户的信息
-                user.set(userInfo).save().then(user => {
-                    // 成功，此时可在控制台中看到更新后的用户信息
-                    this.globalData.user = user.toJSON();
-                }).catch(console.error);
-            }  ,
-            fail:({userInfo})=>{
-                AV.User.loginWithWeapp().then(user => {
-                    console.log('登陆')
-                    this.globalData.user = user.toJSON();
-                }).catch(console.error);
-            }
-        });
-
-        if (!this.data.hasMore) return;
+//        const user = AV.User.current();
+//// 调用小程序 API，得到用户信息
+//        wx.getUserInfo({
+//            success: ({userInfo}) => {
+//                // 更新当前用户的信息
+//                user.set(userInfo).save().then(user => {
+//                    // 成功，此时可在控制台中看到更新后的用户信息
+//                    this.globalData.user = user.toJSON();
+//                }).catch(console.error);
+//            }  ,
+//            fail:({userInfo})=>{
+//                AV.User.loginWithWeapp().then(user => {
+//                    console.log('登陆')
+//                    this.globalData.user = user.toJSON();
+//                }).catch(console.error);
+//            }
+//        });
+//
+//        if (!this.data.hasMore) return;
 
 
         AV.Cloud.run('recipeList', {sort: 'favorite', term: 'objectId', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
@@ -58,12 +58,13 @@ Page({
         // 用传参的方式传入入sort?
 
         // const {} = params;
+
         console.log('onLoad');
-        console.log(params);
+        console.log('a',params);
       this.refresh();
     },
     onShow:function(){
-        console.log('onShow');
+        console.log('onShow收藏');
         this.refresh();
     },
     refresh(){
@@ -72,6 +73,7 @@ Page({
 
 
         // 类型： in_theaters  coming_soon  us_box
+
 
 
         AV.Cloud.run('recipeList', {sort: 'favorite', term: 'objectId', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
@@ -95,7 +97,7 @@ Page({
     },
     upper(){
         wx.showNavigationBarLoading();
-        console.log("upper");
+        console.log("收藏upper");
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
     },

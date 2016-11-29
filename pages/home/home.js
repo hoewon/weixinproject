@@ -20,7 +20,7 @@ Page({
          this.refresh();
     },
     onShow (){
-        console.log('onShow');
+        console.log('onShow首页');
         this.refresh();
     },
     refresh(){
@@ -94,7 +94,7 @@ Page({
 
     upper() {
         wx.showNavigationBarLoading();
-        console.log("upper");
+        console.log("首页upper");
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
         //setTimeout(function(){

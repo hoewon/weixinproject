@@ -34,58 +34,48 @@ Page({
   },
 
   // 页面加载
-  onLoad () {
-    // console.log(params);
-    wx.showNavigationBarLoading();
-    AV.Cloud.run('recipeList', {
-      sort: 'hottest',
-      term: 'totally',
-      ex: '',
-      l: this.data.limit,
-      p: this.data.page
-    }, {remote: true})
-      .then(list=> {
-        this.data.page++;
-        if (list.length) {
-          this.setData({recipes: list, loading: false})
-        } else {
-          this.setData({hasMore: false, loading: false})
-        }
-        wx.hideNavigationBarLoading()
-      })
-      .catch(e => {
-        this.setData({recipes: [], loading: false});
-        console.error(e)
-        wx.hideNavigationBarLoading()
-      });
+  onLoad (params) {
+      console.log('onLoad');
+      console.log(params);
+      this.refresh();
   }
   ,
-  onShow (params){
-    wx.showNavigationBarLoading();
-    AV.Cloud.run('recipeList', {
-          sort: 'hottest',
-          term: 'totally',
-          ex: '',
-          l: this.data.limit,
-          p: this.data.page
-        }, {remote: true})
-        .then(list=> {
-          this.data.page++;
-          if (list.length) {
-            this.setData({recipes: list, loading: false})
-          } else {
-            this.setData({hasMore: false, loading: false})
-          }
-          wx.hideNavigationBarLoading()
-        })
-        .catch(e => {
-          this.setData({recipes: [], loading: false});
-          console.error(e)
-          wx.hideNavigationBarLoading()
-        });
+  onShow (){
+      console.log('onShow');
+      this.refresh();
 
-
-  }
+  },
+    refresh(){
+        // console.log(params);
+        wx.showNavigationBarLoading();
+        AV.Cloud.run('recipeList', {
+                sort: 'hottest',
+                term: 'totally',
+                ex: '',
+                l: this.data.limit,
+                p: this.data.page
+            }, {remote: true})
+            .then(list=> {
+                this.data.page++;
+                if (list.length) {
+                    this.setData({recipes: list, loading: false})
+                } else {
+                    this.setData({hasMore: false, loading: false})
+                }
+                wx.hideNavigationBarLoading()
+            })
+            .catch(e => {
+                this.setData({recipes: [], loading: false});
+                console.error(e)
+                wx.hideNavigationBarLoading()
+            });
+    },
+    upper(){
+        wx.showNavigationBarLoading();
+        console.log("upper");
+        this.refresh();
+        setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
+    }
     ,  tapFive(event){
         console.log(event);
         console.log('跳！！！！！！！');

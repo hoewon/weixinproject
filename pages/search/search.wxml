@@ -82,18 +82,18 @@
         </navigator>
     </view>
 <!--</navigator>-->
-<view class="hot" wx:if="{{display}}">
-    <view class="hot-title-view">
-        <text class="hot-title-text">流行搜索</text>
+    <view class="hot" wx:if="{{display}}">
+        <view class="hot-title-view">
+            <text class="hot-title-text">流行搜索</text>
+        </view>
+        <view class="hot-button-view">
+            <navigator class="hot-button" wx:for="{{hot}}"  url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+                <view class="hot-button">
+                    <text class="hot-button-text">{{item.title}}</text>
+                </view>
+            </navigator>
+        </view>
     </view>
-    <view class="hot-button-view">
-        <navigator class="hot-button" wx:for="{{hot}}"  url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
-            <view class="hot-button">
-                <text class="hot-button-text">{{item.title}}</text>
-            </view>
-        </navigator>
-    </view>
-</view>
 </block>
 
 

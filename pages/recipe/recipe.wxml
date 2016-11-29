@@ -13,7 +13,7 @@
 </loading>
 <block>
 <view wx:if="{{loaded}}">
-    <scroll-view scroll-y="true" wx:if="{{recipe.title}}" bindscrolltolower="loadMore">
+    <scroll-view scroll-y="true" wx:if="{{recipe.title}}" bindscrolltolower="loadMore" bindscrolltoupper="upper" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 
 
         <view class="head">

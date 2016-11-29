@@ -14,43 +14,23 @@ Page({
 
 
   // 页面加载
-  onLoad (params) {
-    // wx.showNavigationBarLoading()
-    // this.data.title = params.title || this.data.title;
-    // this.data.type = params.type || this.data.type;
-    // 用传参的方式传入入sort?
+     onLoad (params){
+         console.log('onLoad');
+         console.log(params);
+         this.refresh();
+    },
+    onShow (){
+        console.log('onShow');
+        this.refresh();
+    },
+    refresh(){
+        wx.showNavigationBarLoading()
+        // this.data.title = params.title || this.data.title;
+        // this.data.type = params.type || this.data.type;
+        // 用传参的方式传入入sort?
 
-    // const {} = params;
-    console.log(params);
-    wx.showNavigationBarLoading();
-
-
-
-    // 类型： in_theaters  coming_soon  us_box
-
-
-    AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
-      .then(list=> {
-        if (list.length) {
-        this.setData({recipes: list, loading: false})
-
-        } else {
-          this.setData({hasMore: false, loading: false})
-        }
-        this.data.page++;
-
-        wx.hideNavigationBarLoading()
-
-      })
-      .catch(e => {
-        this.setData({recipes: [], loading: false});
-        // console.error(e);
-        wx.hideNavigationBarLoading()
-
-      });
-  },
-    onShow (params){
-        wx.showNavigationBarLoading();
+        // const {} = params;
+        //console.log(params);
 
 
 
@@ -61,6 +41,7 @@ Page({
             .then(list=> {
                 if (list.length) {
                     this.setData({recipes: list, loading: false})
+
                 } else {
                     this.setData({hasMore: false, loading: false})
                 }
@@ -110,10 +91,21 @@ Page({
             })
 
         },
+
+    upper() {
+        wx.showNavigationBarLoading();
+        console.log("upper");
+        this.refresh();
+        setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
+        //setTimeout(function(){
+        //    wx.hideNavigationBarLoading();
+        //    wx.stopPullDownRefresh();
+        //}, 2000);
+    },
     loadMore () {
         if (!this.data.hasMore) return;
 
-
+        console.log('loadMore触发');
         AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
             .then(list=> {
                 console.log(this.data.page);

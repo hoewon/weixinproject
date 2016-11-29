@@ -33,7 +33,7 @@ Page({
   onLoad (params) {
     wx.showNavigationBarLoading();
     const {id, title} = params;
-  console.log(params);
+    console.log(params);
 
     this.setData({
       title: title,
@@ -102,6 +102,11 @@ Page({
           this.setData({subtitle: '获取数据异常', recipes: [], loading: false});
           console.error(e)
         })
+  },
+
+
+  upper(){
+    this.onShow();
   },
   onShow(params){
     console.log('onShow');

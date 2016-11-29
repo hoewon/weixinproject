@@ -1,66 +1,4 @@
-/*.search{*/
-    /*width: 735rpx;*/
-    /*height: 90rpx;*/
-    /*padding: 12.5rpx 0 12.5rpx 15rpx;*/
-    /*background: #fff;*/
-/*}*/
-/*.search-left{*/
-    /*!*flex: 8;*!*/
 
-    /*display: flex;*/
-    /*background: #4EA3E7;*/
-    /*!*flex-wrap: nowrap;*!*/
-    /*!*text-align: left;*!*/
-    /*margin-top: 6rpx;*/
-    /*height: 90rpx;*/
-    /*!*justify-content: space-between;*!*/
-    /*align-items: center;*/
-
-/*}*/
-/*.input{*/
-    /*position: absolute;*/
-    /*overflow: hidden;*/
-    /*flex-basis: auto;*/
-    /*top:20rpx;*/
-    /*left:75rpx;*/
-    /*height: 50rpx;*/
-    /*font-size: 17pt;*/
-/*}*/
-/*.clear{*/
-    /*position: absolute;*/
-    /*right:20rpx;*/
-    /*top:50rpx;*/
-    /*height:28rpx;*/
-
-    /*width:28rpx;*/
-/*}*/
-/*.search-left input{*/
-    /*display: inline-block;*/
-    /*flex-basis: auto;*/
-    /*height: 80rpx;*/
-    /*font-size: 17pt;*/
-/*}*/
-/*.search-placeholder{*/
-    /*color: #8CCEFD;*/
-    /*!*line-height: 20rpx;*!*/
-/*}*/
-
-/*.search-left image{*/
-    /*display: inline-block;*/
-    /*flex-basis: auto;*/
-    /*width: 40rpx;*/
-    /*height: 40rpx;*/
-    /*padding: 15rpx 15rpx 15rpx 20rpx;*/
-/*}*/
-
-/*.search-right{*/
-    /*flex: 1;*/
-/*}*/
-/*.search-right image{*/
-    /*width: 45rpx;*/
-    /*height: 45rpx;*/
-    /*padding: 10rpx;*/
-/*}*/
 .weui-search-bar {
     position: relative;
     padding: 8px 10px;
@@ -162,14 +100,16 @@
 
 .result-text-right {
     margin-left: 30rpx;
+    width: 550rpx;
     color: red;
 }
 
 .right {
-    position: absolute;
-    right: 20rpx;
+    position: relative;
+    /*right: -350rpx;*/
     width: 28rpx;
     height: 28rpx;
+    /*left: 350rpx;*/
     /*top:150rpx;*/
 
 

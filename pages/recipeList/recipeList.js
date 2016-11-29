@@ -14,7 +14,7 @@ Page({
 
     loadMore () {
         if (!this.data.hasMore) return;
-
+        console.log('loadMore触发');
         const {sort, term} = this.data;
 
         AV.Cloud.run('recipeList', {
@@ -46,10 +46,10 @@ Page({
 
         if(sort=='tag'){
             AV.Cloud.run('tag', {id: term}, {remote: true}).then((o)=>{
-                console.log("标签asdasdsad！！！！！！",o);
+                console.log("标签",o);
 
                let tkl = o.tkl;
-                console.log('tkl!!!!!!!AAAA',tkl);
+                console.log('tkl',tkl);
                 this.setData({
                     tkl:tkl,
                     title:title
@@ -66,7 +66,7 @@ Page({
         }
 
         if (!sort && !term) {
-            sort = 'hottest',
+                sort = 'hottest',
                 term = 'weekly'
         }
         this.setData({sort: sort, term: term, title: title});
@@ -89,6 +89,13 @@ Page({
                 wx.hideNavigationBarLoading()
             });
     },
+    upper() {
+        wx.showNavigationBarLoading();
+        console.log("upper");
+        this.refresh();
+        setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
+    },
+
 
     onReady () {
         wx.setNavigationBarTitle({title: this.data.title})
@@ -113,6 +120,6 @@ Page({
             })
         }
 
-    },
+    }
 
 })

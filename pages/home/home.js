@@ -14,11 +14,13 @@ Page({
 
 
   // 页面加载
-     onLoad (params){
-         //console.log('onLoad');
-         //console.log(params);
-         //this.refresh();
-    },
+  //   onLoad (params){
+  //       //console.log('onLoad');
+  //       //console.log(params);
+  //
+  //       //this.refresh();
+  //       //this.data.page++;
+  //  },
     onShow (){
         console.log('onShow首页');
         //this.data.page = 0;
@@ -92,9 +94,12 @@ Page({
     upper() {
         wx.showNavigationBarLoading();
         console.log("首页upper");
-        this.data.page=0;
+        this.data.page = 0;
+       this.setData({hasMore:true});
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
+        console.log(this.data.page);
+        console.log('刷新后的hasMore',this.data.hasMore);
         //setTimeout(function(){
         //    wx.hideNavigationBarLoading();
         //    wx.stopPullDownRefresh();
@@ -102,11 +107,13 @@ Page({
     },
     loadMore () {
         if (!this.data.hasMore) return;
-
+        if(this.data.page==0){this.data.page++};
         console.log('loadMore触发');
         AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
             .then(list=> {
                 console.log(this.data.page);
+                console.log('加载中的hasMore',this.data.hasMore);
+                console.log('list!!!!!看看',list);
 
                 if (list.length) {
                     this.setData({recipes: this.data.recipes.concat(list), loading: false})

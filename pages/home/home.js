@@ -1,10 +1,10 @@
 const AV = require('../../utils/av-weapp');
-
+const u = require('../../utils/util');
 // 创建一个页面对象用于控制页面的逻辑
 Page({
   data: {
     page: 0,
-    limit: 10,
+    limit: 3,
     loading: true,
     hasMore: true,
     recipes: [],
@@ -38,6 +38,11 @@ Page({
 
         AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
             .then(list=> {
+                //console.log('第一次加载时list!!!!!看看',list);
+                //list = u.removeDuplicates(list, "objectId");
+                //console.log('去重复',list);
+                //list.unshift({objectId:objectId});
+                // list = u.removeDuplicates(list, objectId);
                 if (list.length) {
                     this.setData({recipes: list, loading: false})
 
@@ -113,10 +118,10 @@ Page({
             .then(list=> {
                 console.log(this.data.page);
                 console.log('加载中的hasMore',this.data.hasMore);
-                console.log('list!!!!!看看',list);
-
+                let a = this.data.recipes.concat(list);
+                a = u.removeDuplicates(a, "objectId");
                 if (list.length) {
-                    this.setData({recipes: this.data.recipes.concat(list), loading: false})
+                    this.setData({recipes: a, loading: false})
                 } else {
                     this.setData({hasMore: false, loading: false})
                 }

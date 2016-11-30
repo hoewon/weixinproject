@@ -34,6 +34,7 @@
         "iconPath": "images/search.png",
         "selectedIconPath": "images/search-actived.png"
       },
+
       {
         "text": "排行",
         "pagePath": "pages/hot/hot",

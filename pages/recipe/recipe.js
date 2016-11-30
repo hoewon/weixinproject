@@ -11,7 +11,7 @@ Page({
     recipe: {},
     // list
     page: 0,
-    limit: 20,
+    limit: 10,
     // type: 'in_theaters',
     // subtitle: '加载中...',
     hasMore: true,
@@ -105,9 +105,9 @@ Page({
   },
 
 
-  upper(){
-    this.onShow();
-  },
+  //upper(){
+  //  this.onShow();
+  //},
   onShow(params){
     console.log('onShow');
     //console.log(params);
@@ -144,32 +144,32 @@ Page({
 
   },
 
-  loadMore () {
-    // 这里是用总长来判断是否有更多内容
-
-    if (!this.data.hasMore) return;
-
-    this.setData({subtitle: '加载中...', loading: true});
-    AV.Cloud.run('recipeList', {
-          sort: 'latest',
-          term: '',
-          ex: '',
-          l: this.data.limit,
-          p: this.data.page
-        }, {remote: true})
-        .then(d => {
-          this.data.page++;
-          if (d.length) {
-            this.setData({recipes: this.data.recipes.concat(d), loading: false})
-          } else {
-            this.setData({hasMore: false, loading: false})
-          }
-        })
-        .catch(e => {
-          this.setData({subtitle: '获取数据异常', loading: false});
-          console.error(e)
-        })
-  },
+  //loadMore () {
+  //  // 这里是用总长来判断是否有更多内容
+  //
+  //  if (!this.data.hasMore) return;
+  //
+  //  this.setData({subtitle: '加载中...', loading: true});
+  //  AV.Cloud.run('recipeList', {
+  //        sort: 'latest',
+  //        term: '',
+  //        ex: '',
+  //        l: this.data.limit,
+  //        p: this.data.page
+  //      }, {remote: true})
+  //      .then(d => {
+  //        this.data.page++;
+  //        if (d.length) {
+  //          this.setData({recipes: this.data.recipes.concat(d), loading: false})
+  //        } else {
+  //          this.setData({hasMore: false, loading: false})
+  //        }
+  //      })
+  //      .catch(e => {
+  //        this.setData({subtitle: '获取数据异常', loading: false});
+  //        console.error(e)
+  //      })
+  //},
 
   tapTag(event) {
     console.log('标签！！！！！');

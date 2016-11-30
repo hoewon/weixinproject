@@ -4,7 +4,7 @@ const u = require('../../utils/util');
 Page({
   data: {
     page: 0,
-    limit: 3,
+    limit: 20,
     loading: true,
     hasMore: true,
     recipes: [],

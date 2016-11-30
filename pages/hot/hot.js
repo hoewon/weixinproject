@@ -1,5 +1,5 @@
 const AV = require('../../utils/av-weapp');
-
+const u = require('../../utils/util');
 // 创建一个页面对象用于控制页面的逻辑
 Page({
   data: {
@@ -11,7 +11,8 @@ Page({
   },
 
   loadMore () {
-    if (!this.data.hasMore) return;
+      if (!this.data.hasMore) return;
+      if(this.data.page==0){this.data.page++};
     AV.Cloud.run('recipeList', {
       sort: 'hottest',
       term: 'totally',
@@ -20,12 +21,14 @@ Page({
       p: this.data.page
     }, {remote: true})
       .then(list=> {
-        this.data.page++;
+          let a = this.data.recipes.concat(list);
+          a = u.removeDuplicates(a, "objectId");
         if (list.length) {
-          this.setData({recipes: this.data.recipes.concat(list), loading: false})
+          this.setData({recipes: a, loading: false})
         } else {
           this.setData({hasMore: false, loading: false})
         }
+          this.data.page++;
       })
       .catch(e => {
         this.setData({recipes: [], loading: false});
@@ -34,12 +37,12 @@ Page({
   },
 
   // 页面加载
-  onLoad (params) {
-      console.log('onLoad');
-      console.log(params);
-      this.refresh();
-  }
-  ,
+  //onLoad (params) {
+  //    console.log('onLoad');
+  //    console.log(params);
+  //    this.refresh();
+  //}
+
   onShow (){
       console.log('onShow排行');
       this.refresh();
@@ -56,7 +59,7 @@ Page({
                 p: this.data.page
             }, {remote: true})
             .then(list=> {
-                this.data.page++;
+                //this.data.page++;
                 if (list.length) {
                     this.setData({recipes: list, loading: false})
                 } else {
@@ -73,6 +76,8 @@ Page({
     upper(){
         wx.showNavigationBarLoading();
         console.log("排行upper");
+        this.data.page = 0;
+        this.setData({hasMore:true});
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
     }

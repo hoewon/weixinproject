@@ -49,9 +49,6 @@ App({
   },
   onHide: function () {
     console.log('App Hide')
-  },
-  globalData:{
-    userInfo:null
   }
 
 })

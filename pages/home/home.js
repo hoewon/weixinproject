@@ -4,7 +4,7 @@ const AV = require('../../utils/av-weapp');
 Page({
   data: {
     page: 0,
-    limit: 20,
+    limit: 10,
     loading: true,
     hasMore: true,
     recipes: [],
@@ -15,24 +15,21 @@ Page({
 
   // 页面加载
      onLoad (params){
-         console.log('onLoad');
-         console.log(params);
-         this.refresh();
+         //console.log('onLoad');
+         //console.log(params);
+         //this.refresh();
     },
     onShow (){
         console.log('onShow首页');
+        //this.data.page = 0;
         this.refresh();
+
+        console.log('show!!!Sgu',this.data.page);
+        console.log(this.data.limit);
+
     },
     refresh(){
         wx.showNavigationBarLoading()
-        // this.data.title = params.title || this.data.title;
-        // this.data.type = params.type || this.data.type;
-        // 用传参的方式传入入sort?
-
-        // const {} = params;
-        //console.log(params);
-
-
 
         // 类型： in_theaters  coming_soon  us_box
 
@@ -45,7 +42,7 @@ Page({
                 } else {
                     this.setData({hasMore: false, loading: false})
                 }
-                this.data.page++;
+                //this.data.page++;
 
                 wx.hideNavigationBarLoading()
 
@@ -57,27 +54,27 @@ Page({
 
             });
     },
-
-  onPullDownRefreash(){
-    AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
-      .then(list=> {
-        if (list.length) {
-          this.setData({recipes: list, loading: false})
-        } else {
-          this.setData({hasMore: false, loading: false})
-        }
-        this.data.page = 0;
-
-        wx.hideNavigationBarLoading()
-
-      })
-      .catch(e => {
-        this.setData({recipes: [], loading: false});
-        // console.error(e);
-        wx.hideNavigationBarLoading()
-
-      });
-  },
+  //
+  //onPullDownRefreash(){
+  //  AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+  //    .then(list=> {
+  //      if (list.length) {
+  //        this.setData({recipes: list, loading: false})
+  //      } else {
+  //        this.setData({hasMore: false, loading: false})
+  //      }
+  //      this.data.page = 0;
+  //
+  //      wx.hideNavigationBarLoading()
+  //
+  //    })
+  //    .catch(e => {
+  //      this.setData({recipes: [], loading: false});
+  //      // console.error(e);
+  //      wx.hideNavigationBarLoading()
+  //
+  //    });
+  //},
     tapFive(event){
         console.log('首页跳！！！！');
         console.log(event);
@@ -95,6 +92,7 @@ Page({
     upper() {
         wx.showNavigationBarLoading();
         console.log("首页upper");
+        this.data.page=0;
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
         //setTimeout(function(){
@@ -121,5 +119,6 @@ Page({
                 this.setData({recipes: [], loading: false});
                 console.error(e)
             })
+        console.log('loadMore!!!Sgu',this.data.page);
     }
 })

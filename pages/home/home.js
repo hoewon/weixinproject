@@ -9,7 +9,9 @@ Page({
     hasMore: true,
     recipes: [],
       loaded:false,
-      swiperHeight:0
+      swiperHeight:0,
+      Id:''
+      //,touch:''
   },
 
 
@@ -24,6 +26,9 @@ Page({
   //  },
     onShow (){
         console.log('onShow首页');
+        this.setData({
+            Id:''
+        });
         //this.data.page = 0;
         this.refresh();
 
@@ -67,7 +72,7 @@ Page({
                 //this.data.page++;
 
                 wx.hideNavigationBarLoading()
-
+                //setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
             })
             .catch(e => {
                 this.setData({recipes: [], loading: false});
@@ -105,11 +110,26 @@ Page({
         let page =  getCurrentPages();
         let url = '../recipe/recipe?id='+Id+'&title='+title
 
+
             wx.navigateTo({
                 url:url
             })
-
         },
+    touch(e){
+        console.log('触摸');
+        console.log(e)
+        let Id = e.currentTarget.dataset.idfive;
+
+        this.setData({
+            Id:Id
+        });
+    },
+    touchend(e){
+
+        this.setData({
+            Id:''
+        });
+    },
 
     upper() {
         wx.showNavigationBarLoading();

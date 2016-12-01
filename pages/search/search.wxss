@@ -81,6 +81,7 @@
     height: 80rpx;
     margin-left: 30rpx;
     align-items: center;
+    cursor: pointer;
 
 }
 

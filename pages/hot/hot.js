@@ -64,7 +64,7 @@ Page({
   },
     refresh(){
         // console.log(params);
-        wx.showNavigationBarLoading();
+        wx.showNavigationBarLoading()
         AV.Cloud.run('recipeList', {
                 sort: 'hottest',
                 term: 'totally',
@@ -80,6 +80,7 @@ Page({
                     this.setData({hasMore: false, loading: false})
                 }
                 wx.hideNavigationBarLoading()
+                //setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
             })
             .catch(e => {
                 this.setData({recipes: [], loading: false});

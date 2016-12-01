@@ -51,7 +51,7 @@ page {
     display: flex;
     /*flex: 1;*/
     border-bottom: 2rpx solid #ccc;
-    cursor: pointer;
+
     /*height: 100%;*/
 }
 
@@ -67,19 +67,43 @@ page {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color:rgba(52,52,52,0.1);
+    /*background-color:rgba(52,52,52,0.3);*/
     width: 750rpx;
     height: 421rpx;
+    /*cursor: pointer;*/
 }
 
-.recipeFull .title {
+.touch{
+    background-color: rgb(52,52,52);
+    opacity: 0.7;
+    /*opacity: 0.3;*/
+}
+.touchstart{
+    /*background-color: rgb(52,52,52);*/
+
+}
+.title {
     color: #fff;
     font-size: 14pt;
+
+    /*background-color: #eeeeee;*/
+
+}
+.titlestart {
+    color: #fff;
+    font-size: 14pt;
+    display:none;
+
 }
 
-.recipeFull .subtitle{
+.subtitle{
     color: #fff;
     font-size: 11pt;
+}
+.subtitlestart{
+    color: #fff;
+    font-size: 11pt;
+    display: none;
 }
 
 /**/

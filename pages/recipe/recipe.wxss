@@ -121,6 +121,7 @@
     display: flex;
     width:95%;
     justify-content:center;
+    cursor: pointer;
 
 }
 

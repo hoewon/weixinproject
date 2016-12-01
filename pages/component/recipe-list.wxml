@@ -3,16 +3,21 @@
     <scroll-view scroll-y="true" class="recipe-list-body"  bindscrolltolower="loadMore" style="height:{{swiperHeight}}px">
 
         <view  data="{{item}}" wx:for="{{recipes}}">
-            <navigator  data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
+            <view data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
+                  bindtap="tapFive" bindtouchstart="touch" bindtouchend="touchend" >
+                <view id="{{item.objectId}}"  class="{{item.objectId==Id?'touchstart':'touch'}}">
                 <view class="recipeFull">
+
                     <view class="cover">
-                        <text class="title">{{item.title}}</text>
-                        <text class="subtitle">{{item.tag.title}} · {{item.date}} · {{item.duration}}</text>
+                        <text class="{{item.objectId==Id?'titlestart':'title'}}">{{item.title}}</text>
+                        <text class="{{item.objectId==Id?'subtitlestart':'subtitle'}}">{{item.tag.title}} · {{item.date}} · {{item.duration}}</text>
                     </view>
                     <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
-
                 </view>
-            </navigator>
+                </view>
+
+
+            </view>
         </view>
         <view class="tips">
             <view wx:if="{{hasMore}}">

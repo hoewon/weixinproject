@@ -52,6 +52,7 @@ Page({
         //const {sort, term} = this.data;
         // 类型： in_theaters  coming_soon  us_box
         console.log('id',app.globalData.user.objectId);
+        console.log(app.globalData);
 
         AV.Cloud.run('recipeList', {sort: 'favorite', term: app.globalData.user.objectId, ex: '', l: this.data.limit, p: this.data.page},
             {remote: true})
@@ -65,7 +66,7 @@ Page({
                     this.setData({hasMore: false, loading: false})
                 }
                 //this.data.page++;
-
+                //setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
                 wx.hideNavigationBarLoading()
 
             })

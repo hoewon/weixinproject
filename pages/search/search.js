@@ -309,10 +309,10 @@ cleartext(){
     //console.log(k,'result');
     let key = event.currentTarget.dataset.id;
     wx.navigateTo({
-      //url="../recipeList/recipeList?sort=keyword&term=11&title=11"
-      //url="../recipeList/recipeList?sort=tag&term=57a80572a341310063420ea1&title=21421412"
-      url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key}
-    );
+          //url="../recipeList/recipeList?sort=keyword&term=11&title=11"
+          //url="../recipeList/recipeList?sort=tag&term=57a80572a341310063420ea1&title=21421412"
+          url: '../recipeList/recipeList?sort=keyword&term=' + key + '&title=' + key
+        });
 
 
   }

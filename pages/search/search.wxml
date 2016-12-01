@@ -50,7 +50,7 @@
 
 
 </view>
-<navigate class="tag-button"  >
+<view class="tag-button"  >
     <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
     <view class="result-view result-tag-view" wx:for="{{tags}}"
           data-id="{{item.objectId}}"
@@ -59,7 +59,7 @@
     >
         <text class="result-text">{{item.title}}</text>
     </view>
-</navigate>
+</view>
 </view>
 <block wx:if="{{display}}">
 <!--<navigator class="tag-button"  >-->

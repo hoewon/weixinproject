@@ -21,6 +21,9 @@ Page({
             }
         })
     },
+    onPullDownRefresh(){
+        this.upper();
+    },
   loadMore () {
       if (!this.data.hasMore) return;
       if(this.data.page==0){this.data.page++};

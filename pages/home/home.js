@@ -4,7 +4,7 @@ const u = require('../../utils/util');
 Page({
   data: {
     page: 0,
-    limit: 20,
+    limit: 10,
     loading: true,
     hasMore: true,
     recipes: [],
@@ -41,6 +41,9 @@ Page({
                 });
             }
         })
+    },
+    onPullDownRefresh(){
+        this.upper();
     },
     refresh(){
         wx.showNavigationBarLoading()

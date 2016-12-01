@@ -43,6 +43,9 @@ Page({
             }
         })
     },
+    onPullDownRefresh(){
+        this.upper();
+    },
     refresh(){
         wx.showNavigationBarLoading();
         console.log('refresh');

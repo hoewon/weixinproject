@@ -8,7 +8,8 @@ Page({
     loading: true,
     hasMore: true,
     recipes: [],
-      loaded:false
+      loaded:false,
+      swiperHeight:0
   },
 
 
@@ -29,6 +30,17 @@ Page({
         console.log('show!!!Sgu',this.data.page);
         console.log(this.data.limit);
 
+    },
+    onReady(){
+        var that = this;
+        wx.getSystemInfo({
+            success: function(res) {
+                console.log('onReady!!!!',res);
+                that.setData({
+                    swiperHeight: (res.windowHeight)
+                });
+            }
+        })
     },
     refresh(){
         wx.showNavigationBarLoading()

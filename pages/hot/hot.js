@@ -7,9 +7,20 @@ Page({
     limit: 20,
     loading: true,
     hasMore: true,
-    recipes: []
+    recipes: [],
+      swiperHeight:0
   },
-
+    onReady(){
+        var that = this;
+        wx.getSystemInfo({
+            success: function(res) {
+                console.log('onReady!!!!',res);
+                that.setData({
+                    swiperHeight: (res.windowHeight)
+                });
+            }
+        })
+    },
   loadMore () {
       if (!this.data.hasMore) return;
       if(this.data.page==0){this.data.page++};

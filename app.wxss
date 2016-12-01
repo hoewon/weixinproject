@@ -32,20 +32,27 @@ page {
     display: flex;
     flex: 1;
     flex-direction: column;
+    /*overflow: hidden;*/
+    width:100%;
+    height:100%;
+    /*margin: 0;*/
+    /*border: 0;*/
+
 }
 
 
-.recipe-list-body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-}
+/*.recipe-list-body {*/
+    /*display: flex;*/
+    /*flex: 1;*/
+    /*flex-direction: column;*/
+/*}*/
 
 .recipeFull {
     display: flex;
     /*flex: 1;*/
     border-bottom: 2rpx solid #ccc;
     cursor: pointer;
+    /*height: 100%;*/
 }
 
 .recipeFull image {

@@ -1,13 +1,15 @@
 const AV = require('../../utils/av-weapp');
 var app = getApp();
+const u = require('../../utils/util');
 // 创建一个页面对象用于控制页面的逻辑
 Page({
     data: {
         page: 0,
-        limit: 20,
+        limit: 5,
         loading: true,
         hasMore: true,
         recipes: [],
+        swiperHeight:0,
         globalData:{
         },
     },
@@ -29,6 +31,17 @@ Page({
         console.log('onShow收藏');
         console.log(app.globalData);
         this.refresh();
+    },
+    onReady(){
+        var that = this;
+        wx.getSystemInfo({
+            success: function(res) {
+                console.log('onReady!!!!',res);
+                that.setData({
+                    swiperHeight: (res.windowHeight)
+                });
+            }
+        })
     },
     refresh(){
         wx.showNavigationBarLoading();
@@ -71,33 +84,34 @@ Page({
 
 
          //获得当前登录用户
-        const user = AV.User.current();
-// 调用小程序 API，得到用户信息
-        wx.getUserInfo({
-            success: ({userInfo}) => {
-                // 更新当前用户的信息
-                user.set(userInfo).save().then(user => {
-                    // 成功，此时可在控制台中看到更新后的用户信息
-                    this.globalData.user = user.toJSON();
-                }).catch(console.error);
-            }  ,
-            fail:({userInfo})=>{
-                AV.User.loginWithWeapp().then(user => {
-                    console.log('登陆')
-                    this.globalData.user = user.toJSON();
-                }).catch(console.error);
-            }
-        });
-
+//        const user = AV.User.current();
+//// 调用小程序 API，得到用户信息
+//        wx.getUserInfo({
+//            success: ({userInfo}) => {
+//                // 更新当前用户的信息
+//                user.set(userInfo).save().then(user => {
+//                    // 成功，此时可在控制台中看到更新后的用户信息
+//                    this.globalData.user = user.toJSON();
+//                }).catch(console.error);
+//            }  ,
+//            fail:({userInfo})=>{
+//                AV.User.loginWithWeapp().then(user => {
+//                    console.log('登陆')
+//                    this.globalData.user = user.toJSON();
+//                }).catch(console.error);
+//            }
+//        });
+        if(this.data.page==0){this.data.page++};
         if (!this.data.hasMore) return;
 
             AV.Cloud.run('recipeList', {sort: 'favorite', term: 'objectId', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
             .then(list=> {
                 console.log(this.data.page);
-
+                let a = this.data.recipes.concat(list);
+                a = u.removeDuplicates(a, "objectId");
 
                 if (list.length) {
-                    this.setData({recipes: this.data.recipes.concat(list), loading: false})
+                    this.setData({recipes: a, loading: false})
                 } else {
                     this.setData({hasMore: false, loading: false})
                 }

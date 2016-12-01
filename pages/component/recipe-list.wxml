@@ -1,7 +1,7 @@
 
-<template name="recipe-list">
+<template name="recipe-list" >
     <scroll-view scroll-y="true" class="recipe-list-body"  bindscrolltolower="loadMore" bindscrolltoupper="upper"
-                 scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" >
+                 style="height:{{swiperHeight}}px">
 
         <view  data="{{item}}" wx:for="{{recipes}}">
             <navigator  data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">

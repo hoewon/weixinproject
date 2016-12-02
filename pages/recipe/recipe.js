@@ -267,6 +267,21 @@ Page({
 
 
   },
+  touch(e){
+    console.log('触摸');
+    console.log(e)
+    let Id = e.currentTarget.dataset.idfive;
+
+    this.setData({
+      Id:Id
+    });
+  },
+  touchend(e){
+
+    this.setData({
+      Id:''
+    });
+  },
 
 
   tapSub(e){

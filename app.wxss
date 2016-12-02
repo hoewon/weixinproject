@@ -63,11 +63,9 @@ page {
 .recipeFull .cover {
     position: absolute;
     display: flex;
-    /*flex: 1;*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*background-color:rgba(52,52,52,0.3);*/
     width: 750rpx;
     height: 421rpx;
     /*cursor: pointer;*/

@@ -35,6 +35,8 @@ Page({
         console.log('show!!!Sgu',this.data.page);
         console.log(this.data.limit);
 
+
+
     },
     onReady(){
         var that = this;
@@ -65,7 +67,6 @@ Page({
                 // list = u.removeDuplicates(list, objectId);
                 if (list.length) {
                     this.setData({recipes: list, loading: false})
-
                 } else {
                     this.setData({hasMore: false, loading: false})
                 }
@@ -80,6 +81,9 @@ Page({
                 wx.hideNavigationBarLoading()
 
             });
+
+
+
     },
   //
   //onPullDownRefreash(){
@@ -167,5 +171,6 @@ Page({
                 console.error(e)
             })
         console.log('loadMore!!!Sgu',this.data.page);
+        console.log("recipes",this.data.recipes);
     }
 })

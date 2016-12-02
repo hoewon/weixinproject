@@ -3,9 +3,10 @@
     <scroll-view scroll-y="true" class="recipe-list-body"  bindscrolltolower="loadMore" style="height:{{swiperHeight}}px">
 
         <view  data="{{item}}" wx:for="{{recipes}}">
+            <view id="{{item.objectId}}"  class="{{item.objectId==Id?'touchstart':'touch'}}"></view>
             <view data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
                   bindtap="tapFive" bindtouchstart="touch" bindtouchend="touchend" >
-                <view id="{{item.objectId}}"  class="{{item.objectId==Id?'touchstart':'touch'}}"></view>
+
                 <view class="recipeFull">
 
                     <view class="cover">

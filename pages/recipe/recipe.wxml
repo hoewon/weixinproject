@@ -62,15 +62,16 @@
         </view>
         <!--关联列表-->
         <view class="thumb-view">
-            <view  class="thumb" data="{{item}}" wx:for="{{recipes}}"
-                   data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}" bindtap="tapFive">
-                <navigator class="thumbclicd" >
+            <view  class="{{item.objectId==Id?'thumbstart':'thumb'}}" data="{{item}}" wx:for="{{recipes}}"data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
+                   bindtouchstart="touch" bindtouchend="touchend" bindtap="tapFive">
+                <view class="thumbclicd" >
+
                     <image class="thumb-image" src="{{item.image}}?imageView2/1/w/320/h/180"/>
                     <view class="thumb-right">
                         <text class="thumb-right-title">{{item.title}}</text>
                         <text class="thumb-right-subtitle">{{item.tag.title}} · {{item.date}}</text>
                     </view>
-                </navigator>
+                </view>
             </view>
         </view>
         <!--<view class="tips">-->

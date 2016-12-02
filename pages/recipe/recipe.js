@@ -25,7 +25,8 @@ Page({
     uiconP:'../../images/unlike.png',
     globalData:{
     },
-    loaded:false
+    loaded:false,
+    text:'哈哈\n哈'
 
 
   },
@@ -63,7 +64,18 @@ Page({
         .then(o=> {
 
           console.log('o!!!!!!!oooo',o);
+          let text = o.recipe.desc.replace(/<br\/>/g,"\n");
+          let des = o.recipe.desc.indexOf('<br/>');
           // if (d.subjects.length) {
+          if(des<20){
+            this.setdata({
+            desc:o.recipe.desc? o.recipe.desc.slice(0,des) :''
+            });
+          }else{
+            this.setData({
+              desc:o.recipe.desc? o.recipe.desc.slice(0,20) :''
+            });
+          }
           this.setData({
             // title: o.recipe.title,
             recipe: o.recipe,
@@ -73,8 +85,10 @@ Page({
             share:o.recipe.share,
             favorite: o.recipe.favorite,
             src: video,
-            desc:o.recipe.desc? o.recipe.desc.slice(0,20) :''
+            text:text
           })
+          console.log(typeof(text));
+          console.log('des',des);
         })
         .catch(e => {
           this.setData({title: '获取数据异常', recipe: {}, loading: false});

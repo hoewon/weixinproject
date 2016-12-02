@@ -154,8 +154,7 @@ Page({
 
   input(e){
     console.log(e.detail.value,'tag 出口 转向taglist');
-    const text = e.detail.value.replace(/[\~\!\@\#\$\%\^\&\*\(\)\-\=\+\_\'\"\[\]\{\}\<\>\,\.\?\\\s\n\|\`\￥\、\【\】\、\;\:\‘\’\“\”\《\》\...\。]+/,"")
-        ;
+    const text = e.detail.value.replace(/[\~\!\@\#\$\%\^\&\*\(\)\-\=\+\_\'\"\[\]\{\}\<\>\,\.\?\\\s\n\|\`\￥\、\【\】\、\;\:\‘\’\“\”\《\》\...\。]+/,"");
     if(text.length>0){
       this.setData({
         text:text,

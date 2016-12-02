@@ -1,10 +1,10 @@
 <!--<import src="../component/recipe-list.wxml"/>-->
-<template name="thumb">
+<!--<template name="thumb">-->
     <!--url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}"-->
 
 
 
-</template>
+<!--</template>-->
 
 <loading hidden="{{!loading}}">
 <view>
@@ -35,7 +35,7 @@
                 </view>
                 <view wx:else>
                     <view bindtap="tapSub">
-                        <text class="desc">{{recipe.desc}} 来源{{recipe.cook.username}}</text>
+                        <text class="desc"> {{text}}\n 来源{{recipe.cook.username}}</text>
                     </view>
                     <view  class="tags">
                         <navigator  class="tag-button"  bindtap="tapTag"

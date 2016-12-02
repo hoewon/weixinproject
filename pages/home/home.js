@@ -2,28 +2,28 @@ const AV = require('../../utils/av-weapp');
 const u = require('../../utils/util');
 // 创建一个页面对象用于控制页面的逻辑
 Page({
-  data: {
-    page: 0,
-    limit: 10,
-    loading: true,
-    hasMore: true,
-    recipes: [],
-      loaded:false,
-      swiperHeight:0,
-      Id:''
-      //,touch:''
-  },
+    data: {
+        page: 0,
+        limit: 10,
+        loading: true,
+        hasMore: true,
+        recipes: [],
+        loaded:false,
+        swiperHeight:0,
+        Id:''
+        //,touch:''
+    },
 
 
 
-  // 页面加载
-  //   onLoad (params){
-  //       //console.log('onLoad');
-  //       //console.log(params);
-  //
-  //       //this.refresh();
-  //       //this.data.page++;
-  //  },
+    // 页面加载
+    //   onLoad (params){
+    //       //console.log('onLoad');
+    //       //console.log(params);
+    //
+    //       //this.refresh();
+    //       //this.data.page++;
+    //  },
     onShow (){
         console.log('onShow首页');
         this.setData({
@@ -34,6 +34,7 @@ Page({
 
         console.log('show!!!Sgu',this.data.page);
         console.log(this.data.limit);
+        console.log('text!!!!!!',this.data.text);
 
 
 
@@ -60,7 +61,6 @@ Page({
 
         AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
             .then(list=> {
-                //console.log('第一次加载时list!!!!!看看',list);
                 //list = u.removeDuplicates(list, "objectId");
                 //console.log('去重复',list);
                 //list.unshift({objectId:objectId});
@@ -85,27 +85,27 @@ Page({
 
 
     },
-  //
-  //onPullDownRefreash(){
-  //  AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
-  //    .then(list=> {
-  //      if (list.length) {
-  //        this.setData({recipes: list, loading: false})
-  //      } else {
-  //        this.setData({hasMore: false, loading: false})
-  //      }
-  //      this.data.page = 0;
-  //
-  //      wx.hideNavigationBarLoading()
-  //
-  //    })
-  //    .catch(e => {
-  //      this.setData({recipes: [], loading: false});
-  //      // console.error(e);
-  //      wx.hideNavigationBarLoading()
-  //
-  //    });
-  //},
+    //
+    //onPullDownRefreash(){
+    //  AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+    //    .then(list=> {
+    //      if (list.length) {
+    //        this.setData({recipes: list, loading: false})
+    //      } else {
+    //        this.setData({hasMore: false, loading: false})
+    //      }
+    //      this.data.page = 0;
+    //
+    //      wx.hideNavigationBarLoading()
+    //
+    //    })
+    //    .catch(e => {
+    //      this.setData({recipes: [], loading: false});
+    //      // console.error(e);
+    //      wx.hideNavigationBarLoading()
+    //
+    //    });
+    //},
     tapFive(event){
         console.log('首页跳！！！！');
         console.log(event);
@@ -115,10 +115,10 @@ Page({
         let url = '../recipe/recipe?id='+Id+'&title='+title
 
 
-            wx.navigateTo({
-                url:url
-            })
-        },
+        wx.navigateTo({
+            url:url
+        })
+    },
     touch(e){
         console.log('触摸');
         console.log(e)
@@ -139,7 +139,7 @@ Page({
         wx.showNavigationBarLoading();
         console.log("首页upper");
         this.data.page = 0;
-       this.setData({hasMore:true});
+        this.setData({hasMore:true});
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
         console.log(this.data.page);

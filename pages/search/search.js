@@ -260,8 +260,6 @@ cleartext(){
       caption: caption,
       //disable:true
     });
-
-    console.log(caption);
     wx.setStorage({
       key:'caption',
       //object

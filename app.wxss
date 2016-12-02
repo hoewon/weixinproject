@@ -75,7 +75,10 @@ page {
 
 .touch{
     background-color: rgb(52,52,52);
-    opacity: 0.7;
+    opacity: 0.2;
+    width: 750rpx;
+    height: 421rpx;
+    position: absolute;
     /*opacity: 0.3;*/
 }
 .touchstart{

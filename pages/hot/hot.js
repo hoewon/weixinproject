@@ -8,7 +8,8 @@ Page({
     loading: true,
     hasMore: true,
     recipes: [],
-      swiperHeight:0
+      swiperHeight:0,
+      Id:''
   },
     onReady(){
         var that = this;
@@ -95,7 +96,22 @@ Page({
         this.setData({hasMore:true});
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
-    }
+    },
+        touch(e){
+            console.log('触摸');
+            console.log(e)
+            let Id = e.currentTarget.dataset.idfive;
+
+            this.setData({
+                Id:Id
+            });
+        },
+        touchend(e){
+
+            this.setData({
+                Id:''
+            });
+        }
     ,  tapFive(event){
         console.log(event);
         console.log('跳！！！！！！！');

@@ -12,6 +12,7 @@ Page({
         swiperHeight:0,
         globalData:{
         },
+        Id:''
     },
 
     // 页面加载
@@ -83,6 +84,21 @@ Page({
         this.data.page=0;
         this.refresh();
         setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
+    },
+    touch(e){
+        console.log('触摸');
+        console.log(e)
+        let Id = e.currentTarget.dataset.idfive;
+
+        this.setData({
+            Id:Id
+        });
+    },
+    touchend(e){
+
+        this.setData({
+            Id:''
+        });
     },
     loadMore () {
 

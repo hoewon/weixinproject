@@ -5,7 +5,7 @@
         <view  data="{{item}}" wx:for="{{recipes}}">
             <view data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
                   bindtap="tapFive" bindtouchstart="touch" bindtouchend="touchend" >
-                <view id="{{item.objectId}}"  class="{{item.objectId==Id?'touchstart':'touch'}}">
+                <view id="{{item.objectId}}"  class="{{item.objectId==Id?'touchstart':'touch'}}"></view>
                 <view class="recipeFull">
 
                     <view class="cover">
@@ -14,7 +14,7 @@
                     </view>
                     <image src="{{item.image}}?imageView2/1/w/750/h/421"/>
                 </view>
-                </view>
+
 
 
             </view>

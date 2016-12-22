@@ -37,16 +37,16 @@ Page({
   onLoad (params) {
     wx.showNavigationBarLoading();
     const {id, title} = params;
-    console.log(params);
+    console.log('aaaa',params);
 
-    this.setData({
-      title: title,
-    });
+    //this.setData({
+    //  title: title,
+    //});
     console.log(id);
     console.log(title);
 
     //const video = 'http://ac-4s28kj56.clouddn.com/8a1a5a0e83d5044c9081.mp4';
-    const video = "https://dn-4s28kj56.qbox.me/31be8bd7ced64d6d.mp4";
+
 //初始判断是否收藏
     AV.Cloud.run('isFav', {id: id}, {remote: true})
         .then((o)=> {
@@ -69,6 +69,12 @@ Page({
         .then(o=> {
           console.log('id',id);
           console.log('o!!!!!!!oooo',o);
+          const video = o.recipe.video;
+          this.setData({
+            title: o.recipe.title,
+          })
+          wx.setNavigationBarTitle({title: o.recipe.title});
+
           this.data.fxtitle=o.recipe.title ;
           let text = o.recipe.desc.replace(/<br\/>/g,"\n");
           let des = o.recipe.desc.indexOf('<br/>');
@@ -153,7 +159,7 @@ Page({
   },
 
   onReady () {
-    wx.setNavigationBarTitle({title: this.data.title});
+
 
   },
   tapFive(event){
@@ -239,7 +245,38 @@ Page({
     })
     wx.scanCode({
       success: (res) => {
-        console.log('扫码',res)
+        console.log('扫码',res.result)
+       let re= res.result.slice(0,16);
+
+
+        console.log(re);
+        if(re=='http://snaku.tv/'){
+          console.log('http://snaku.tv/');
+          let rep=res.result.slice(16,22);
+          console.log(rep);
+          AV.Cloud.run('code',{type:'qr',code:rep},{remote:true}).then((o)=>{
+                console.log('ooooo',o)
+            let surl = '../recipe/recipe?id='+o.uid
+            //this.data.fxurl=url;
+            //if(page.length<3){
+              wx.navigateTo({
+                url:surl
+                  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+              });
+            //}else{
+            //  wx.redirectTo({
+            //    url:url
+            //  })
+            //}
+              })
+        }else{
+          console.log('false')
+          wx.showToast({
+            title: '失败，不支持此类型',
+            icon: 'loading',
+            duration: 2000
+          })
+        }
       },
       fail:(res)=>{
         console.log('失败',res)

@@ -25,31 +25,39 @@ Page({
     onPullDownRefresh(){
         this.upper();
     },
-  loadMore () {
-      if (!this.data.hasMore) return;
-      if(this.data.page==0){this.data.page++};
-    AV.Cloud.run('recipeList', {
-      sort: 'hottest',
-      term: 'totally',
-      ex: '',
-      l: this.data.limit,
-      p: this.data.page
-    }, {remote: true})
-      .then(list=> {
-          let a = this.data.recipes.concat(list);
-          a = u.removeDuplicates(a, "objectId");
-        if (list.length) {
-          this.setData({recipes: a, loading: false})
-        } else {
-          this.setData({hasMore: false, loading: false})
-        }
-          this.data.page++;
-      })
-      .catch(e => {
-        this.setData({recipes: [], loading: false});
-        console.error(e)
-      })
-  },
+    loadMore () {
+        if (!this.data.hasMore) return;
+        if(this.data.page==0){this.data.page++};
+        console.log('loadMore触发');
+
+        AV.Cloud.run('recipeList', {
+                sort: 'hottest',
+                term: 'totally',
+                ex: '',
+                l: this.data.limit,
+                p: this.data.page
+            }, {remote: true})
+            .then(list=> {
+                console.log('list',list);
+                console.log(this.data.page);
+                console.log('加载中的hasMore',this.data.hasMore);
+                let a = this.data.recipes.concat(list);
+                a = u.removeDuplicates(a, "objectId");
+                if (list.length) {
+                    this.setData({recipes: a, loading: false})
+                } else {
+                    this.setData({hasMore: false, loading: false})
+                }
+
+            })
+            .catch(e => {
+                this.setData({recipes: [], loading: false});
+                console.error(e)
+            })
+        this.data.page++;
+        console.log('loadMore!!!Sgu',this.data.page);
+        console.log("recipes",this.data.recipes);
+    },
 
   // 页面加载
   //onLoad (params) {
@@ -68,12 +76,13 @@ Page({
         wx.showNavigationBarLoading()
         AV.Cloud.run('recipeList', {
                 sort: 'hottest',
-                term: 'totally',
+                term: 7,
                 ex: '',
                 l: this.data.limit,
                 p: this.data.page
             }, {remote: true})
             .then(list=> {
+                console.log(list)
                 //this.data.page++;
                 if (list.length) {
                     this.setData({recipes: list, loading: false})

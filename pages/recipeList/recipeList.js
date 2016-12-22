@@ -9,7 +9,10 @@ Page({
         recipes: [],
         share:false,
         tkl:'',
-        title:''
+        title:'',
+        fxtitle:'',
+        fxdesc:'',
+        fxurl:''
     },
 
     loadMore () {
@@ -40,9 +43,13 @@ Page({
     },
 
     onLoad (params) {
-
+        console.log('lai!!!!',params)
         wx.showNavigationBarLoading();
         let {sort, term, title} = params;
+        this.data.fxtitle=title;
+        this.data.fxdesc='关于这个'+title+'的视频';
+        this.data.fxurl='/recipeList/recipeList?sort='+sort+'&term=' + term + '&title=' + title
+
 
         if(sort=='tag'){
             AV.Cloud.run('tag', {id: term}, {remote: true}).then((o)=>{
@@ -120,6 +127,13 @@ Page({
             })
         }
 
-    }
+    },
+    onShareAppMessage() {
 
+        return {
+            title: this.data.fxtitle,
+            desc: this.data.fxdesc,
+            path: this.data.fxurl
+        }
+    }
 })

@@ -55,16 +55,19 @@ Page({
     },
     refresh(){
         wx.showNavigationBarLoading()
-
+        console.log('refresh');
         // 类型： in_theaters  coming_soon  us_box
 
-
-        AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+        AV.Cloud.run('recipeList',
+            {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page},
+            {remote: true})
             .then(list=> {
+
                 //list = u.removeDuplicates(list, "objectId");
-                //console.log('去重复',list);
+                console.log('去重复',list);
                 //list.unshift({objectId:objectId});
                 // list = u.removeDuplicates(list, objectId);
+
                 if (list.length) {
                     this.setData({recipes: list, loading: false})
                 } else {
@@ -127,14 +130,15 @@ Page({
         this.setData({
             Id:Id
         });
+
+
+
     },
     touchend(e){
-
         this.setData({
             Id:''
         });
     },
-
     upper() {
         wx.showNavigationBarLoading();
         console.log("首页upper");
@@ -149,12 +153,21 @@ Page({
         //    wx.stopPullDownRefresh();
         //}, 2000);
     },
+
     loadMore () {
         if (!this.data.hasMore) return;
         if(this.data.page==0){this.data.page++};
         console.log('loadMore触发');
-        AV.Cloud.run('recipeList', {sort: 'latest', term: '', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+
+        AV.Cloud.run('recipeList', {
+            sort: 'latest',
+            term: '',
+            ex: '',
+            l: this.data.limit,
+            p: this.data.page
+        }, {remote: true})
             .then(list=> {
+                console.log('list',list);
                 console.log(this.data.page);
                 console.log('加载中的hasMore',this.data.hasMore);
                 let a = this.data.recipes.concat(list);
@@ -164,12 +177,13 @@ Page({
                 } else {
                     this.setData({hasMore: false, loading: false})
                 }
-                this.data.page++;
+
             })
             .catch(e => {
                 this.setData({recipes: [], loading: false});
                 console.error(e)
             })
+        this.data.page++;
         console.log('loadMore!!!Sgu',this.data.page);
         console.log("recipes",this.data.recipes);
     }

@@ -55,7 +55,8 @@ Page({
         console.log('id',app.globalData.user.objectId);
         console.log(app.globalData);
 
-        AV.Cloud.run('recipeList', {sort: 'favorite', term: app.globalData.user.objectId, ex: '', l: this.data.limit, p: this.data.page},
+        AV.Cloud.run('recipeList',
+            {sort: 'favorite', term: app.globalData.user.objectId, ex: '', l: this.data.limit, p: this.data.page},
             {remote: true})
             .then(list=> {
                 console.log('list!!!!!',list);

@@ -15,6 +15,7 @@ Page({
     text: '',
     loading: false,
     tags:[],
+    hot:'',
     //输入开关
     display:true,
     text:''
@@ -23,6 +24,7 @@ Page({
 
     // hasMore: false,
   },
+
 //页面加载
   onLoad(){
     wx.showNavigationBarLoading();
@@ -41,9 +43,11 @@ Page({
     // 获取本地存取
     let _this = this;
     wx.getStorage({
-      key: 'caption',
+      key: 'caption' ,
+      //data: this.data.caption
       //如果有数据
       success: function(res) {
+
         console.log('成功')
         console.log('res'+res)
 
@@ -270,8 +274,8 @@ cleartext(){
       }
     })
     let key = e.currentTarget.dataset.id;
-    let title = e. currentTarget.title;
-
+    let title = e. currentTarget.dataset.title;
+console.log('title!!!!',title)
     wx.navigateTo({
       //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
       url: '../recipeList/recipeList?sort=tag&term=' + key + '&title=' + title

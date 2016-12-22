@@ -7,6 +7,9 @@ var app = getApp();
 Page({
   data: {
     title: '',
+    fxtitle:'',
+    fxdesc:'',
+    fxurl:'',
     loading: true,
     recipe: {},
     // list
@@ -26,7 +29,7 @@ Page({
     globalData:{
     },
     loaded:false,
-    text:'哈哈\n哈'
+    text:''
 
 
   },
@@ -48,7 +51,9 @@ Page({
     AV.Cloud.run('isFav', {id: id}, {remote: true})
         .then((o)=> {
           console.log('o',o)
+
           // 只触发监听, 不触发本体
+
           this.setData({
             isFav: o,
             favorite: o ? this.data.favorite + 1 : this.data.favorite - 1
@@ -62,20 +67,26 @@ Page({
 
     AV.Cloud.run('recipe', {id: id}, {remote: true})
         .then(o=> {
-
+          console.log('id',id);
           console.log('o!!!!!!!oooo',o);
+          this.data.fxtitle=o.recipe.title ;
           let text = o.recipe.desc.replace(/<br\/>/g,"\n");
           let des = o.recipe.desc.indexOf('<br/>');
+          this.data.fxdesc=o.recipe.desc.slice(0,des);
           // if (d.subjects.length) {
           if(des<20){
-            this.setdata({
+            this.setData({
             desc:o.recipe.desc? o.recipe.desc.slice(0,des) :''
             });
+
           }else{
             this.setData({
               desc:o.recipe.desc? o.recipe.desc.slice(0,20) :''
             });
+
           }
+
+
           this.setData({
             // title: o.recipe.title,
             recipe: o.recipe,
@@ -91,7 +102,7 @@ Page({
           console.log('des',des);
         })
         .catch(e => {
-          this.setData({title: '获取数据异常', recipe: {}, loading: false});
+          this.setData({title: '获数据异常', recipe: {}, loading: false});
           console.error(e)
         });
 
@@ -132,6 +143,14 @@ Page({
 
 
   },
+  onShareAppMessage() {
+
+    return {
+      title: this.data.fxtitle,
+      desc: this.data.fxdesc,
+      path: this.data.fxurl
+    }
+  },
 
   onReady () {
     wx.setNavigationBarTitle({title: this.data.title});
@@ -139,7 +158,7 @@ Page({
   },
   tapFive(event){
     console.log(event);
-    console.log('跳！！！！！！！');
+
     let Id = event.currentTarget.dataset.idfive;
     let title = event.currentTarget.dataset.titlefive;
     let page =  getCurrentPages();
@@ -193,7 +212,7 @@ Page({
     let page =  getCurrentPages();
     //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
     let url = '../recipeList/recipeList?sort=tag&term=' + Id + '&title=' + title;
-
+  this.data.fxurl=url;
     if(page.length<3){
       wx.navigateTo({
         url:url
@@ -217,6 +236,14 @@ Page({
       });
     }).catch((err) => {
       console.log(err);
+    })
+    wx.scanCode({
+      success: (res) => {
+        console.log('扫码',res)
+      },
+      fail:(res)=>{
+        console.log('失败',res)
+      }
     })
 
     //分享功能，微信未开放接口

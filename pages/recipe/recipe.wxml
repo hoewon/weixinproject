@@ -13,7 +13,7 @@
 </loading>
 <block>
 <view wx:if="{{loaded}}">
-    <view scroll-y="true" wx:if="{{recipe.title}}">
+    <scroll-view scroll-y="true" wx:if="{{recipe.title}}">
           <!--bindscrolltolower="loadMore" bindscrolltoupper="upper" -->
           <!--scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"-->
 
@@ -38,12 +38,13 @@
                         <text class="desc"> {{text}}\n 来源{{recipe.cook.username}}</text>
                     </view>
                     <view  class="tags">
-                        <navigator  class="tag-button"  bindtap="tapTag"
+                        <view  class="{{item.objectId==tagId?'tagstart':'taged'}}"  bindtap="tapTag"
                                     wx:for="{{tags}}" data-idfive="{{item.objectId}}"
-                                   data-titlefive="{{item.title}}">
+                                   data-titlefive="{{item.title}}"
+                                    bindtouchstart="totouch" bindtouchend="totouchend">
 
-                            <text class="tag-button-text">{{item.title}}</text>
-                        </navigator>
+                            <text class="tag-button-text ">{{item.title}}</text>
+                        </view>
                     </view>
                 </view>
             </view>
@@ -52,12 +53,24 @@
                     <icon type="success" size="25" color="{{isShare?'red':'orange'}}"/>
                     <text>{{share}}</text>
                 </view>
-                <view class="button" bindtap="tapFav" >
+                <block>
+                <view class="button" bindtap="tapFav" wx:if="{{isFav}}" >
 
-                    <image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"
-                           color="{{isFav?'red':'orange'}}">{{iconP}}</image>
-                    <text>{{favorite}}</text>
+                    <!--<image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"-->
+                           <!--color="{{isFav?'red':'orange'}}">{{iconP}}</image>-->
+                    <button size="mini" >已收藏{{favorite}}</button>
+                    <text></text>
                 </view>
+                <view class="button" bindtap="tapFav" wx:else >
+
+                    <!--<image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"-->
+                           <!--color="{{isFav?'red':'orange'}}">{{iconP}}</image>-->
+                    <button size="mini" plain="true">收藏{{favorite}}</button>
+                    <text></text>
+
+                </view>
+                </block>
+
             </view>
         </view>
         <!--关联列表-->
@@ -85,6 +98,6 @@
         <!--</view>-->
 
 
-    </view>
+    </scroll-view>
 </view>
 </block>

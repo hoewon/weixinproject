@@ -93,6 +93,22 @@
     background-color: gray;
     border-radius: 15rpx;
 }
+.tagstart{
+    margin-right: 10rpx;
+    margin-bottom: 10rpx;
+    padding:5rpx 15rpx;
+    background-color: gray;
+    border-radius: 15rpx;
+    border-top: 1rpx solid #eee;
+    background: red;
+}
+.taged{
+    margin-right: 10rpx;
+    margin-bottom: 10rpx;
+    padding:5rpx 15rpx;
+    border-radius: 15rpx;
+    background-color: gray;
+}
 
 .tag-button-text {
     /*margin: 20rpx 20rpx;*/

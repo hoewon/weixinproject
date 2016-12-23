@@ -106,6 +106,15 @@ Page({
 
     onReady () {
         wx.setNavigationBarTitle({title: this.data.title})
+        var that = this;
+        wx.getSystemInfo({
+            success: function(res) {
+                console.log('onReady!!!!',res);
+                that.setData({
+                    swiperHeight: (res.windowHeight)
+                });
+            }
+        })
     }
     ,
     tapFive(event){
@@ -127,6 +136,24 @@ Page({
             })
         }
 
+    },
+
+    touch(e){
+        console.log('触摸');
+        console.log(e)
+        let Id = e.currentTarget.dataset.idfive;
+
+        this.setData({
+            Id:Id
+        });
+
+
+
+    },
+    touchend(e){
+        this.setData({
+            Id:''
+        });
     },
     onShareAppMessage() {
 

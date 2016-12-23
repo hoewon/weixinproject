@@ -37,7 +37,9 @@
 <!--wx:if="{{text.length}}"-->
 <view class="result-title " >
     <!--url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}-->
-    <navigator  class="result-view result-tag-view" data-id="{{text}}"  bindtap="toResult">
+    <navigator  class="result-view result-tag-view" data-id="{{text}}"
+                url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}} "
+    bindtap="toResult">
     <view class="result-view "   >
         <image class="result-image-search" src="../../images/search.png"></image>
         <!--<icon type="search" size="20" color="{{gray}}"/>-->
@@ -52,13 +54,14 @@
 </view>
 <view class="tag-button"  >
     <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
-    <view class="result-view result-tag-view" wx:for="{{tags}}"
+    <navigator class="result-view result-tag-view" wx:for="{{tags}}"
           data-id="{{item.objectId}}"
           data-title="{{item.title}}"
           bindtap="toTag"
+               url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}"
     >
         <text class="result-text">{{item.title}}</text>
-    </view>
+    </navigator>
 </view>
 </view>
 <block wx:if="{{display}}">
@@ -70,16 +73,17 @@
             <icon bindtap="toClear"
                   class="icon" type="clear" size="12" color="#ccc"/>
         </view>
-        <navigator class="result-view result-tag-view"  bindtap="toCaption"
+        <view class=" {{item.key==tagId?'start':'end'}}"  bindtap="toCaption"
               data-id="{{item.id}}"
               data-key="{{item.key}}"
               data-title="{{item.title}}"
-              wx:for="{{caption}}">
+              wx:for="{{caption}}"
+              bindtouchstart="totouch" bindtouchend="totouchend">
             <!--data-id="{{item.objectId}}"-->
             <!--data-title="{{item.title}}"-->
             <!--bindtap="toTag"-->
             <text class="result-text">{{item.title?item.title:item.key}}</text>
-        </navigator>
+        </view>
     </view>
 <!--</navigator>-->
     <view class="hot-p" wx:if="{{display}}">

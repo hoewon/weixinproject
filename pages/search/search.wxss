@@ -107,6 +107,32 @@
     width: 550rpx;
     color: red;
 }
+.start{
+    display: flex;
+    flex-direction: row;
+    height: 80rpx;
+    margin-left: 30rpx;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 2rpx solid #ccc;
+    background: rgba(20,20,20,0.1);
+}
+.start:last-child{
+    border-bottom:0rpx;
+}
+.end{
+    display: flex;
+    flex-direction: row;
+    height: 80rpx;
+    margin-left: 30rpx;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 2rpx solid #ccc;
+
+}
+.end:last-child{
+    border-bottom:0rpx;
+}
 
 .right {
     position: relative;

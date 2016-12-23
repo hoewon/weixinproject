@@ -32,7 +32,7 @@ Page({
 
         AV.Cloud.run('recipeList', {
                 sort: 'hottest',
-                term: 'totally',
+                term: 30,
                 ex: '',
                 l: this.data.limit,
                 p: this.data.page
@@ -76,7 +76,7 @@ Page({
         wx.showNavigationBarLoading()
         AV.Cloud.run('recipeList', {
                 sort: 'hottest',
-                term: 7,
+                term: 30,
                 ex: '',
                 l: this.data.limit,
                 p: this.data.page

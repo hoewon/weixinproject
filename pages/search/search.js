@@ -93,10 +93,13 @@ Page({
   onShow:function(){
     console.log('onshow');
     this.load()
+    setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 1000);
+  },
+  onReady(){
 
   },
   load(){
-    wx.showNavigationBarLoading();
+
     AV.Cloud.run('categoryList', {sort: 'hot', term: '', ex: '', l: 9, p: ''}, {remote: true})
         .then((o)=> {
           //console.log(o);
@@ -220,8 +223,8 @@ cleartext(){
     if(!title){
       console.log('单')
       wx.navigateTo({
-        url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key}
-      );
+        url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+      });
     }else{
       console.log('双')
       wx.navigateTo({
@@ -276,10 +279,10 @@ cleartext(){
     let key = e.currentTarget.dataset.id;
     let title = e. currentTarget.dataset.title;
 console.log('title!!!!',title)
-    wx.navigateTo({
-      //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
-      url: '../recipeList/recipeList?sort=tag&term=' + key + '&title=' + title
-    });
+  //  wx.navigateTo({
+  //    //url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}
+  //    url: '../recipeList/recipeList?sort=tag&term=' + key + '&title=' + title
+  //  });
   }
   ,
   //搜索框搜索
@@ -309,12 +312,26 @@ console.log('title!!!!',title)
     })
     //console.log(k,'result');
     let key = event.currentTarget.dataset.id;
-    wx.navigateTo({
-          //url="../recipeList/recipeList?sort=keyword&term=11&title=11"
-          //url="../recipeList/recipeList?sort=tag&term=57a80572a341310063420ea1&title=21421412"
-          url: '../recipeList/recipeList?sort=keyword&term=' + key + '&title=' + key
-        });
+    //wx.navigateTo({
+    //      //url="../recipeList/recipeList?sort=keyword&term=11&title=11"
+    //      //url="../recipeList/recipeList?sort=tag&term=57a80572a341310063420ea1&title=21421412"
+    //      url: '../recipeList/recipeList?sort=keyword&term=' + key + '&title=' + key
+    //    });
 
 
+  }
+  ,totouch(e){
+    console.log('totouch',e)
+    let tagId = e.currentTarget.dataset.key;
+
+    this.setData({
+      tagId:tagId
+    });
+  },
+  totouchend(e){
+    console.log('totouchend',e)
+    this.setData({
+      tagId:''
+    });
   }
 })

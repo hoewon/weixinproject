@@ -115,8 +115,8 @@ Page({
 
 
     AV.Cloud.run('recipeList', {
-          sort: 'latest',
-          term: '',
+          sort: 'related',
+          term: id,
           ex: '',
           l: this.data.limit,
           p: this.data.page
@@ -160,7 +160,7 @@ Page({
 
   onReady () {
 
-
+    setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
   },
   tapFive(event){
     console.log(event);
@@ -232,7 +232,20 @@ Page({
 
   },
 
+  totouch(e){
+    console.log('totouch',e)
+    let tagId = e.currentTarget.dataset.idfive;
 
+    this.setData({
+      tagId:tagId
+    });
+  },
+  totouchend(e){
+    console.log('totouchend',e)
+    this.setData({
+      tagId:''
+    });
+  },
   tapShare(event){
     AV.Cloud.run('fav',{id: this.data.recipe.objectId, isShare: this.data.isFav}, {remote: true}).then((o)=>{
       console.log("分享",o);

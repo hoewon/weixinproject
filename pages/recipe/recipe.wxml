@@ -24,17 +24,17 @@
             <view class="title-view">
                 <text class="title">{{recipe.title}}</text>
             </view>
-            <view class="subtitle-view" bindtap="tapSub">
+            <view class="subtitle-view" bindtap="tapSub" >
                 <text class="subtitle">{{tags[0].title}} · {{recipe.date}}</text>
                 <image src="../../images/less.png" class="right" animation="{{a2}}"  type="success"
-                       color="{{isFav?'red':'orange'}}"></image>
+                       color="{{isFav?'red':'orange'}}" ></image>
             </view>
-            <view animation="{{animationData}}" class="desc-view" >
-                <view wx:if="{{draw}}" bindtap="tapSub">
+            <view animation="{{animationData}}" class="desc-view"  >
+                <view wx:if="{{draw}}" >
                     <text class="desc" >{{desc}}</text>
                 </view>
                 <view wx:else>
-                    <view bindtap="tapSub">
+                    <view >
                         <text class="desc"> {{text}}\n 来源{{recipe.cook.username}}</text>
                     </view>
                     <view  class="tags">
@@ -58,15 +58,13 @@
 
                     <!--<image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"-->
                            <!--color="{{isFav?'red':'orange'}}">{{iconP}}</image>-->
-                    <button size="mini" >已收藏{{favorite}}</button>
-                    <text></text>
+                    <button size="mini" class="fav">已收藏{{favorite}}</button>
                 </view>
                 <view class="button" bindtap="tapFav" wx:else >
 
                     <!--<image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"-->
                            <!--color="{{isFav?'red':'orange'}}">{{iconP}}</image>-->
-                    <button size="mini" plain="true">收藏{{favorite}}</button>
-                    <text></text>
+                    <button size="mini" class="fav" plain="true">收藏{{favorite}}</button>
 
                 </view>
                 </block>

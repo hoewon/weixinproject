@@ -30,7 +30,7 @@ Page({
             Id:''
         });
         //this.data.page = 0;
-        this.refresh();
+
 
         console.log('show!!!Sgu',this.data.page);
         console.log(this.data.limit);
@@ -40,6 +40,8 @@ Page({
 
     },
     onReady(){
+        console.log('onReady')
+        this.refresh();
         var that = this;
         wx.getSystemInfo({
             success: function(res) {
@@ -64,7 +66,7 @@ Page({
             .then(list=> {
 
                 //list = u.removeDuplicates(list, "objectId");
-                console.log('去重复',list);
+                //console.log('去重复',list);
                 //list.unshift({objectId:objectId});
                 // list = u.removeDuplicates(list, objectId);
 
@@ -138,6 +140,7 @@ Page({
         this.setData({
             Id:''
         });
+        //this.tapFive(e);
     },
     upper() {
         wx.showNavigationBarLoading();
@@ -170,6 +173,8 @@ Page({
                 console.log('list',list);
                 console.log(this.data.page);
                 console.log('加载中的hasMore',this.data.hasMore);
+                //去重复
+
                 let a = this.data.recipes.concat(list);
                 a = u.removeDuplicates(a, "objectId");
                 if (list.length) {

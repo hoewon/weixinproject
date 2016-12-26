@@ -246,6 +246,18 @@ Page({
       tagId:''
     });
   },
+  t1(e){
+    AV.Cloud.run('code',{type:'bar',code:e},{remote:true}).then((o)=>{
+      if(o.type=='category'){
+        console.log('category')
+        let turl='../recipeList/recipeList?sort=tag&term='+o.objectId+'&title='+o.title
+        wx.navigateTo({
+          url:turl
+
+        });
+      }
+    })
+  },
   tapShare(event){
     AV.Cloud.run('fav',{id: this.data.recipe.objectId, isShare: this.data.isFav}, {remote: true}).then((o)=>{
       console.log("分享",o);
@@ -259,8 +271,8 @@ Page({
     wx.scanCode({
       success: (res) => {
         console.log('扫码',res.result)
+        //二维码
        let re= res.result.slice(0,16);
-
 
         console.log(re);
         if(re=='http://snaku.tv/'){
@@ -269,20 +281,35 @@ Page({
           console.log(rep);
           AV.Cloud.run('code',{type:'qr',code:rep},{remote:true}).then((o)=>{
                 console.log('ooooo',o)
-            let surl = '../recipe/recipe?id='+o.uid
-            //this.data.fxurl=url;
-            //if(page.length<3){
+            if(o.type='recipe') {
+              let surl = '../recipe/recipe?id=' + o.uid
+              //this.data.fxurl=url;
+              //if(page.length<3){
               wx.navigateTo({
-                url:surl
-                  //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
+                url: surl
+                //url: '../recipeList/recipeList?sort=keyword&term='+key+'&title='+key
               });
-            //}else{
-            //  wx.redirectTo({
-            //    url:url
-            //  })
-            //}
+            }else{
+              if(o.type=='category'){
+                let surl ='../recipeList/recipeList?sort=tag&term='+o.uid
+
+                wx.navigateTo({
+                  url: surl
+
+                });
+              }
+            }
               })
-        }else{
+          //条形码12
+        }else if(res.result.length==12){
+          this.t1(res.result)
+
+        }//条形码13
+        else if(res.result.length==13){
+
+          this.t1(res.result)
+        }
+        else{
           console.log('false')
           wx.showToast({
             title: '失败，不支持此类型',
@@ -390,7 +417,7 @@ Page({
     if (this.data.draw) {
       a1.height('auto').step();
       a2.rotate(-180).step();
-      a2.opacity(0).step();
+      //a2.opacity(0).step();
       this.setData({
         a2: a2.export(),
         draw: false
@@ -398,7 +425,7 @@ Page({
     } else {
       a1.height('80rpx').step();
       a2.rotate(0).step();
-      a2.opacity('0').step();
+      //a2.opacity('0').step();
       this.setData({
         a2: a2.export(),
         draw: true

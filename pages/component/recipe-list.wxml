@@ -1,15 +1,19 @@
-
+<view>
 <template name="recipe-list" >
-    <scroll-view scroll-y="true" class="recipe-list-body"  bindscrolltolower="loadMore" style="height:{{swiperHeight}}px">
+    <scroll-view scroll-y="true" class="recipe-list-body"
+                 bindscrolltolower="loadMore" style="height:{{swiperHeight}}px">
 
         <view  data="{{item}}" wx:for="{{recipes}}">
             <view id="{{item.objectId}}"  class="{{item.objectId==Id?'touchstart':'touch'}}"></view>
             <view data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
-                  bindtap="tapFive" bindtouchstart="touch" bindtouchend="touchend" >
+                  catchtap="tapFive" catchlongtap="tapFive">
 
-                <view class="recipeFull">
+                <view class="recipeFull"  >
 
-                    <view class="cover">
+                    <view class="cover"
+                          data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
+
+                          bindtouchstart="touch"  bindtouchend="touchend">
                         <text class="{{item.objectId==Id?'titlestart':'title'}}">{{item.title}}</text>
                         <text class="{{item.objectId==Id?'subtitlestart':'subtitle'}}">{{item.tag.title}} · {{item.date}} · {{item.duration}}</text>
                     </view>
@@ -32,3 +36,4 @@
     </scroll-view>
     <loading hidden="{{!loading}}">加载中...</loading>
 </template>
+</view>

@@ -39,8 +39,8 @@
 
     right:39rpx;
 
-    height:25rpx;
-    width:25rpx;
+    height:45rpx;
+    width:45rpx;
 
 
 }
@@ -117,7 +117,10 @@
 }
 
 /*thumb*/
-
+.fav{
+    width: 180rpx;
+    height: 60rpx;
+}
 .thumb-view {
     /*display: flex;*/
     /*flex-direction: column;*/

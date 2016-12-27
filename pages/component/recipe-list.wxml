@@ -6,7 +6,7 @@
         <view  data="{{item}}" wx:for="{{recipes}}">
             <view id="{{item.objectId}}"  class="{{item.objectId==Id?'touchstart':'touch'}}"></view>
             <view data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
-                  catchtap="tapFive" catchlongtap="tapFive">
+                  catchtap="tapFive" >
 
                 <view class="recipeFull"  >
 

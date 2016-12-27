@@ -67,32 +67,45 @@ Page({
       console.log(err);
     });
 
+var that =this;
+    wx.getSystemInfo({
+      success: function(res) {
+        console.log(res.model)
+        console.log(res.pixelRatio)
+        console.log(res.windowWidth)
+        console.log(res.windowHeight)
+        console.log(res.language)
+        console.log(res.version)
+        console.log(res.platform)
+        that.setData({
+          res:res
+        })
+      }
+    })
 
-
-
-    AV.Cloud.run('recipe', {id: id}, {remote: true})
+    AV.Cloud.run('recipe', {id: id,platform:this.data.res}, {remote: true})
         .then(o=> {
           console.log('id',id);
           console.log('o!!!!!!!oooo',o);
-          const video = o.recipe.video;
+          const video = o.video;
           this.setData({
-            title: o.recipe.title,
+            title: o.title,
           })
-          wx.setNavigationBarTitle({title: o.recipe.title});
+          wx.setNavigationBarTitle({title: o.title});
 
-          this.data.fxtitle=o.recipe.title ;
-          let text = o.recipe.desc.replace(/<br\/>/g,"\n");
-          let des = o.recipe.desc.indexOf('<br/>');
-          this.data.fxdesc=o.recipe.desc.slice(0,des);
+          this.data.fxtitle=o.title ;
+          let text = o.desc.replace(/<br\/>/g,"\n");
+          let des = o.desc.indexOf('<br/>');
+          this.data.fxdesc=o.desc.slice(0,des);
           // if (d.subjects.length) {
           if(des<20){
             this.setData({
-            desc:o.recipe.desc? o.recipe.desc.slice(0,des) :''
+            desc:o.desc? o.desc.slice(0,des) :''
             });
 
           }else{
             this.setData({
-              desc:o.recipe.desc? o.recipe.desc.slice(0,20) :''
+              desc:o.desc? o.desc.slice(0,20) :''
             });
 
           }
@@ -100,12 +113,12 @@ Page({
 
           this.setData({
             // title: o.recipe.title,
-            recipe: o.recipe,
+            recipe: o,
             tags: o.tags,
             loading: false,
             //loaded:true,
-            share:o.recipe.share,
-            favorite: o.recipe.favorite,
+            share:o.share,
+            favorite: o.favorite,
             src: video,
             text:text
           })
@@ -195,34 +208,46 @@ Page({
     }
 
   },
-
-  loadMore () {
-    // 这里是用总长来判断是否有更多内容
-console.log('loadmor')
-    if (!this.data.hasMore) return;
-
-    this.setData({subtitle: '加载中...', loading: true});
-    AV.Cloud.run('recipeList', {
-          sort: 'related',
-          term: this.data.id,
-          ex: '',
-          l: this.data.limit,
-          p: this.data.page
-        }, {remote: true})
-        .then(d => {
-          this.data.page++;
-          console.log('d',d)
-          if (d.length) {
-            this.setData({recipes: this.data.recipes.concat(d), loading: false})
-          } else {
-            this.setData({hasMore: false, loading: false})
-          }
-        })
-        .catch(e => {
-          this.setData({subtitle: '获取数据异常', loading: false});
-          console.error(e)
-        })
-  },
+//
+//  loadMore () {
+//    // 这里是用总长来判断是否有更多内容
+//console.log('loadmor')
+//    if (!this.data.hasMore) return;
+//
+//    this.setData({subtitle: '加载中...', loading: true});
+//    AV.Cloud.run('recipeList', {
+//          sort: 'related',
+//          term: this.data.id,
+//          ex: '',
+//          l: this.data.limit,
+//          p: this.data.page
+//        }, {remote: true})
+//        .then(d => {
+//          this.data.page++;
+//          console.log('d',d)
+//          if (d.length) {
+//            this.setData({recipes: this.data.recipes.concat(d), loading: false})
+//          } else {
+//            this.setData({hasMore: false, loading: false})
+//          }
+//        })
+//        .catch(e => {
+//          this.setData({subtitle: '获取数据异常', loading: false});
+//          console.error(e)
+//        })
+//
+//
+//
+//    var that = this;
+//    wx.getSystemInfo({
+//      success: function(res) {
+//        console.log('onReady!!!!',res);
+//        that.setData({
+//          swiperHeight: (res.windowHeight)
+//        });
+//      }
+//    })
+//  },
 
   tapTag(event) {
     console.log('标签！！！！！');
@@ -360,6 +385,7 @@ console.log('loadmor')
     //})
   },
   tapFav(event){
+    console.log('收藏')
     //收藏
     // 判定是否登陆 ,如果未登录要去登陆
 

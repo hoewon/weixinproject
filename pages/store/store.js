@@ -62,6 +62,9 @@ Page({
                 console.log('list!!!!!',list);
                 console.log(this.data.limit);
                 console.log(this.data.page);
+                if(list.length<this.data.limit){
+                    this.setData({hasMore: false, loading: false})
+                }
                 if (list.length) {
                     this.setData({recipes: list, loading: false})
                 } else {
@@ -124,10 +127,9 @@ Page({
 //        });
         if(this.data.page==0){this.data.page++};
         if (!this.data.hasMore) return;
-
-            AV.Cloud.run('recipeList', {sort: 'favorite', term: 'objectId', ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
+            AV.Cloud.run('recipeList', {sort: 'favorite', term: app.globalData.user.objectId, ex: '', l: this.data.limit, p: this.data.page}, {remote: true})
             .then(list=> {
-                console.log(this.data.page);
+                console.log('loadmore',this.data.page);
                 let a = this.data.recipes.concat(list);
                 a = u.removeDuplicates(a, "objectId");
 

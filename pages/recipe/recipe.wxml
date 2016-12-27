@@ -13,7 +13,9 @@
 </loading>
 <block>
 <view wx:if="{{loaded}}">
-    <scroll-view scroll-y="true" wx:if="{{recipe.title}}" style="height:{{swiperHeight}}px" bindscrolltolower="loadMore">
+    <scroll-view  scroll-y="true" wx:if="{{recipe.title}}"  bindscrolltolower="loadMore">
+                 <!--style="height:{{swiperHeight}}px" -->
+
           <!-- bindscrolltoupper="upper" -->
           <!--scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"-->
 
@@ -86,13 +88,13 @@
             </view>
         </view>
         <view class="tips">
-            <view wx:if="{{hasMore}}">
-                <image src="/images/loading.gif" mode="aspectFill"/>
-                <text>玩了命的加载中...</text>
-            </view>
-            <view wx:else>
+            <!--<view wx:if="{{hasMore}}">-->
+                <!--<image src="/images/loading.gif" mode="aspectFill"/>-->
+                <!--<text>玩了命的加载中...</text>-->
+            <!--</view>-->
+            <!--<view wx:else>-->
                 <text>没有更多内容了</text>
-            </view>
+            <!--</view>-->
         </view>
 
 

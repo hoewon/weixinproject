@@ -83,6 +83,9 @@ Page({
                 this.data.page++;
                 console.log('跳转')
                 console.log(list)
+                if(list.length<this.data.limit){
+                    this.setData({hasMore: false, loading: false})
+                }
                 if (list.length) {
                     this.setData({recipes: list, loading: false})
                 } else {

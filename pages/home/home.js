@@ -177,6 +177,7 @@ Page({
 
                 let a = this.data.recipes.concat(list);
                 a = u.removeDuplicates(a, "objectId");
+                console.log('a',a)
                 if (list.length) {
                     this.setData({recipes: a, loading: false})
                 } else {

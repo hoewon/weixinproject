@@ -12,6 +12,7 @@ Page({
     fxurl:'',
     loading: true,
     recipe: {},
+    swiperHeight:0,
     // list
     page: 0,
     limit: 10,
@@ -29,7 +30,8 @@ Page({
     globalData:{
     },
     loaded:false,
-    text:''
+    text:'',
+    id:''
 
 
   },
@@ -37,6 +39,9 @@ Page({
   onLoad (params) {
     wx.showNavigationBarLoading();
     const {id, title} = params;
+    this.setData({
+      id:id
+    })
     console.log('aaaa',params);
 
     //this.setData({
@@ -159,7 +164,15 @@ Page({
   },
 
   onReady () {
-
+    var that = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        console.log('onReady!!!!',res);
+        that.setData({
+          swiperHeight: (res.windowHeight)
+        });
+      }
+    })
     setTimeout(function(){wx.hideNavigationBarLoading();wx.stopPullDownRefresh();}, 2000);
   },
   tapFive(event){
@@ -183,32 +196,33 @@ Page({
 
   },
 
-  //loadMore () {
-  //  // 这里是用总长来判断是否有更多内容
-  //
-  //  if (!this.data.hasMore) return;
-  //
-  //  this.setData({subtitle: '加载中...', loading: true});
-  //  AV.Cloud.run('recipeList', {
-  //        sort: 'latest',
-  //        term: '',
-  //        ex: '',
-  //        l: this.data.limit,
-  //        p: this.data.page
-  //      }, {remote: true})
-  //      .then(d => {
-  //        this.data.page++;
-  //        if (d.length) {
-  //          this.setData({recipes: this.data.recipes.concat(d), loading: false})
-  //        } else {
-  //          this.setData({hasMore: false, loading: false})
-  //        }
-  //      })
-  //      .catch(e => {
-  //        this.setData({subtitle: '获取数据异常', loading: false});
-  //        console.error(e)
-  //      })
-  //},
+  loadMore () {
+    // 这里是用总长来判断是否有更多内容
+console.log('loadmor')
+    if (!this.data.hasMore) return;
+
+    this.setData({subtitle: '加载中...', loading: true});
+    AV.Cloud.run('recipeList', {
+          sort: 'related',
+          term: this.data.id,
+          ex: '',
+          l: this.data.limit,
+          p: this.data.page
+        }, {remote: true})
+        .then(d => {
+          this.data.page++;
+          console.log('d',d)
+          if (d.length) {
+            this.setData({recipes: this.data.recipes.concat(d), loading: false})
+          } else {
+            this.setData({hasMore: false, loading: false})
+          }
+        })
+        .catch(e => {
+          this.setData({subtitle: '获取数据异常', loading: false});
+          console.error(e)
+        })
+  },
 
   tapTag(event) {
     console.log('标签！！！！！');

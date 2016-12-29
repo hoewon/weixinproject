@@ -1,0 +1,103 @@
+<!--<import src="../component/recipe-list.wxml"/>-->
+<!--<template name="thumb">-->
+    <!--url="../recipe/recipe?id={{item.objectId}}&title={{item.title}}"-->
+
+
+
+<!--</template>-->
+
+<loading hidden="{{!loading}}">
+<view>
+    加载中...
+</view>
+</loading>
+<block>
+<view wx:if="{{loaded}}">
+    <scroll-view  scroll-y="true" wx:if="{{recipe.title}}"  bindscrolltolower="loadMore">
+                 <!--style="height:{{swiperHeight}}px" -->
+
+          <!-- bindscrolltoupper="upper" -->
+          <!--scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}"-->
+
+
+
+        <view class="head">
+            <video class="video" src="{{src}}" binderror="videoErrorCallback"></video>
+            <view class="title-view">
+                <text class="title">{{recipe.title}}</text>
+            </view>
+            <view class="subtitle-view" bindtap="tapSub" >
+                <text class="subtitle">{{tags[0].title}} · {{publishedAt}}</text>
+                <image src="../../images/less.png" class="right" animation="{{a2}}"  type="success"
+                       color="{{isFav?'red':'orange'}}" ></image>
+            </view>
+            <view animation="{{animationData}}" class="desc-view"  >
+                <view wx:if="{{draw}}" >
+                    <text class="desc" >{{desc}}</text>
+                </view>
+                <view wx:else>
+                    <view >
+                        <text class="desc"> {{text}}\n 来源{{recipe.cook.username}}</text>
+                    </view>
+                    <view  class="tags">
+                        <view  class="{{item.objectId==tagId?'tagstart':'taged'}}"  bindtap="tapTag"
+                                    wx:for="{{tags}}" data-idfive="{{item.objectId}}"
+                                   data-titlefive="{{item.title}}"
+                                    bindtouchstart="totouch" bindtouchend="totouchend">
+
+                            <text class="tag-button-text ">{{item.title}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="buttons">
+                <!--<view class="button" bindtap="tapShare" >-->
+                    <!--<icon type="success" size="25" color="{{isShare?'red':'orange'}}"/>-->
+                    <!--<text>{{share}}</text>-->
+                <!--</view>-->
+                <block>
+                <view class="button" bindtap="tapFav" wx:if="{{isFav}}" >
+
+                    <!--<image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"-->
+                           <!--color="{{isFav?'red':'orange'}}">{{iconP}}</image>-->
+                    <button size="mini" class="fav">已收藏{{favorite}}</button>
+                </view>
+                <view class="button" bindtap="tapFav" wx:else >
+
+                    <!--<image src="{{isFav?iconP:uiconP}}" class="icon-image"   type="success"-->
+                           <!--color="{{isFav?'red':'orange'}}">{{iconP}}</image>-->
+                    <button size="mini" class="fav" plain="true">收藏{{favorite}}</button>
+
+                </view>
+                </block>
+
+            </view>
+        </view>
+        <!--关联列表-->
+        <view class="thumb-view">
+            <view  class="{{item.objectId==Id?'thumbstart':'thumb'}}" data="{{item}}" wx:for="{{recipes}}"data-idfive="{{item.objectId}}" data-titlefive="{{item.title}}"
+                   bindtouchstart="touch" bindtouchend="touchend" bindtap="tapFive">
+                <view class="thumbclicd" >
+
+                    <image class="thumb-image" src="{{item.image}}?imageView2/1/w/320/h/180"/>
+                    <view class="thumb-right">
+                        <text class="thumb-right-title">{{item.title}}</text>
+                        <text class="thumb-right-subtitle">{{item.tag.title}} · {{item.date}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="tips">
+            <!--<view wx:if="{{hasMore}}">-->
+                <!--<image src="/images/loading.gif" mode="aspectFill"/>-->
+                <!--<text>玩了命的加载中...</text>-->
+            <!--</view>-->
+            <!--<view wx:else>-->
+                <text>没有更多内容了</text>
+            <!--</view>-->
+        </view>
+
+
+    </scroll-view>
+</view>
+</block>

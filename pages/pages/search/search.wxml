@@ -1,0 +1,112 @@
+<view class="weui-search-bar">
+<form class="weui-search-bar_form" bindsubmit="" bindreset="formReset">
+    <view class="weui-search-bar_box">
+            <image class="weui-image-search" src="../../images/search.png"></image>
+
+            <input class="weui-search-bar_input" placeholder="{{subtitle}}" placeholder-class="search-placeholder"
+                   name="keyword" bindinput="input"
+                   bindchange="search" value="{{text}}"/>
+
+
+            <icon wx:if="{{!display}}"  class="weui-icon-clear" bindtap="cleartext" type="clear" />
+</view>
+
+
+
+
+
+
+    <view class="" bindtap="upper">
+        <!--可以加logo--!>
+        <!--<button  class="icon" formType="submit" type="default" loading="{{loading}}"-->
+        <!--disabled="{{disabled}}" hover-class="button-hover">搜索</button>-->
+    </view>
+
+</form>
+</view>
+
+        <!--搜索结果-->
+<view wx:if="{{loaded}}">
+
+</view>
+<view wx:else>
+</view>
+
+
+<view class="result" wx:if="{{!display}}">
+<!--wx:if="{{text.length}}"-->
+<view class="result-title " >
+    <!--url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}}-->
+    <navigator  class="result-view result-tag-view" data-id="{{text}}"
+                url="../recipeList/recipeList?sort=keyword&term={{text}}&title={{text}} "
+    bindtap="toResult">
+    <view class="result-view "   >
+        <image class="result-image-search" src="../../images/search.png"></image>
+        <!--<icon type="search" size="20" color="{{gray}}"/>-->
+        <text class="result-text result-text-right">{{text}}</text>
+        <!--<text class="result-text right">></text>-->
+        <image  class="right" src="../../images/arrowright.png"></image>
+
+    </view>
+</navigator>
+
+
+</view>
+<view class="tag-button"  >
+    <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
+    <navigator class="result-view result-tag-view" wx:for="{{tags}}"
+          data-id="{{item.objectId}}"
+          data-title="{{item.title}}"
+          bindtap="toTag"
+               url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}"
+    >
+        <text class="result-text">{{item.title}}</text>
+    </navigator>
+</view>
+</view>
+<block wx:if="{{display}}">
+<!--<navigator class="tag-button"  >-->
+    <!--url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">-->
+    <view wx:if="{{caption.length>0}}">
+        <view class="hot-title-view">
+            <text class="hot-title-text">搜索记录</text>
+            <icon bindtap="toClear"
+                  class="icon" type="clear" size="12" color="#ccc"/>
+        </view>
+        <view class=" {{item.key==tagId?'start':'end'}}"  bindtap="toCaption"
+              data-id="{{item.id}}"
+              data-key="{{item.key}}"
+              data-title="{{item.title}}"
+              wx:for="{{caption}}"
+              bindtouchstart="totouch" bindtouchend="totouchend">
+            <!--data-id="{{item.objectId}}"-->
+            <!--data-title="{{item.title}}"-->
+            <!--bindtap="toTag"-->
+            <text class="result-text">{{item.title?item.title:item.key}}</text>
+        </view>
+    </view>
+<!--</navigator>-->
+    <view class="hot-p" wx:if="{{display}}">
+        <view class="hot-title-search">
+            <text class="hot-title-text">流行搜索</text>
+        </view>
+        <view class="hot">
+                <view class="hot-button-view">
+                    <navigator class="hot-button" wx:for="{{hot}}"  url="../recipeList/recipeList?sort=tag&term={{item.objectId}}&title={{item.title}}">
+                        <view class="hot-button">
+                            <text class="hot-button-text">{{item.title}}</text>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+    </view>
+</block>
+
+
+        <!--用button 还是navigator 都待定-->
+
+        <!--<view class="hot-button-view">-->
+        <!--<view class="hot-button" wx:for="{{hot}}">-->
+        <!--<view id="{{item.objectId}}" data-title="{{item.title}}" bindtap="tapTag">{{item.title}}</view>-->
+        <!--</view>-->
+        <!--</view>-->
